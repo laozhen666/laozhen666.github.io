@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    p{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.1rem;
+    }
+    figure{
+        margin: 0 !important;
+    }
+    pre{
+        padding: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    td{
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    h1,h2,h3,h4,h5,h6{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    @media (min-width: 1024px) {
+        #middle-box{
+            min-width: 56rem;
+        }
+    
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog - Archives</title>
+    <title>blog - </title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/toc.css">
     
 <header class="bg-black text-hacker-white py-4 font-dos font-extrabold">
     <div class="container mx-auto flex items-center justify-between space-x-8">
@@ -134,165 +166,51 @@
 
 
 <meta name="generator" content="Hexo 8.1.2"></head>
-<body class="bg-black container mx-auto">
-    <h1 class="text-4xl text-hacker-color1 font-bold font-dos">Archives</h1>
-    <hr class="w-full border-t-2 border-line-color border-dashed">
-    <div class="container mx-auto flex bg-black min-h-screen">
-        <div class="w-full">
-            
+<body class="bg-black text-hacker-color3 container mx-auto" style="overflow-x:hidden">
+    <!-- 文章标题 -->
+    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center"></h1>
 
-            <div class="archive-list text-lg mt-8">
-            
-                <section class="mb-6">
-                <h2 class="text-2xl font-bold text-hacker-color1 mb-4">2026</h2>
-                <ul class="ml-4">
-                    
-                    <li class="mb-2">
-                        <span class="text-hacker-color3 ">2026-10-29 >> </span>
-                        <a class="text-hacker-color1 hover:underline" href="/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/">安卓强制截屏</a>
-                    </li>
-                    
-                </ul>
-                </section>
-            
-            </div>
+    <!-- 发布时间 -->
+    <p class="text-hacker-color3 text-center text-sm mb-4">
+        2026-10-29
+    </p>
 
+    <!-- 文章内容 -->
+    <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
+        <div id="middle-box">
+            <hr>
+<p>title: php代码执行<br>catagories</p>
+<p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p>
+<p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p>
+<p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p>
+<p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p>
+<p>2.过滤特定字符<br>比如说他过滤了flag，我们可以使用通配符*或者？进行补齐，？只能补齐一个字符。在移动文件等场景也会使用通配符。<br>2.1还可以通过b64加密再解码输出的形式输出</p>
+<p>3.无回显<br>输入指令无回显，使用＆＆或者｜｜进行一个短路处理，就是说把执行的命令放左边，将右边的命令进行一个短路，右边的命令无回显，左边正常运行</p>
+<p>4.拼接过滤<br>其实也是2的一种，如果防御者把b64或者echo过滤了可以用这种<br>如a&#x3D;c;b&#x3D;at;c&#x3D;fla;d&#x3D;g.php;$a$b ${c}${d}<br>等效于cat flag.php</p>
+<p>5.符号过滤<br>比如说把空格过滤<br>读文件时可以用&lt;&gt;<br>或者用＄{IFS}<br>或者用控制字符代替如%01，找不到控制字符时可以爆破试试<br>万不得已可以在源代码找到这个符号，然后根据源代码的位置将这个符号进行输出如<br>echo ${hajbsh:12:1}<br>输出hajb后十二个字符后第一个字符</p>
 
         </div>
         
-    <div class="w-1/3 hidden md:block space-y-4 mt-8">
-      
+            <div class="post-container">
+            <aside class="toc-container">
+                <button class="toc-toggle">文章目录</button>
+                <nav class="toc" id="toc"></nav>
+            </aside>
+        </div>
         
-          <!-- 搜索框 -->
-          <input type="text" id="search-input" placeholder="Search..." class="w-full p-2.5 text-lg mb-5 border-2 border-line-color rounded bg-black text-white placeholder-gray-400"/>
-          <div id="search-results"></div>
-        
-  
-        
-  
-        
-  
-        
-  
-        
-  
-      
-        
-  
-        
-          <!-- 公告栏 -->
-          <div class=" text-white p-4 rounded-md border-2 border-dashed border-line-color mb-4">
-            <h3 class="font-bold text-lg text-hacker-color1">Notice</h3>
-            <p class="mt-4"> 🎉 欢迎来到我的博客！</br> 请查看最新文章~</p>
-          </div>
-        
-  
-        
-  
-        
-  
-        
-  
-      
-        
-  
-        
-  
-        
-          <!-- 分类部分 -->
-          <h3 class="text-hacker-color1 font-bold text-lg">Categories</h3>
-          <div>
-            
-              <a href="http://example.com/categories/ctf学习-暂时/" class="text-hacker-color3 hover:text-white">
-                ctf学习(暂时) (1)
-              </a>
-              <br />
-            
-              <a href="http://example.com/categories/工具分享/" class="text-hacker-color3 hover:text-white">
-                工具分享 (2)
-              </a>
-              <br />
-            
-            
-          </div>
-          <hr class="w-full border-t-2 border-line-color border-dashed">
-        
-  
-        
-  
-        
-  
-      
-        
-  
-        
-  
-        
-  
-        
-          <!-- 标签部分 -->
-          <h3 class="text-hacker-color1 font-bold text-lg">Tags</h3>
-          <div class="flex flex-wrap justify-start items-center">
-            
-              <a href="http://example.com/tags/Android/" class="text-hacker-color3 hover:bg-hacker-hover-color hover:text-white block border border-hacker-color3 hover:border-dotted rounded-sm py-0.5 px-2 mr-4 mb-2">
-                Android <sub>1</sub>
-              </a>
-              <br />
-            
-              <a href="http://example.com/tags/root/" class="text-hacker-color3 hover:bg-hacker-hover-color hover:text-white block border border-hacker-color3 hover:border-dotted rounded-sm py-0.5 px-2 mr-4 mb-2">
-                root <sub>1</sub>
-              </a>
-              <br />
-            
-              <a href="http://example.com/tags/截图/" class="text-hacker-color3 hover:bg-hacker-hover-color hover:text-white block border border-hacker-color3 hover:border-dotted rounded-sm py-0.5 px-2 mr-4 mb-2">
-                截图 <sub>1</sub>
-              </a>
-              <br />
-            
-            
-          </div>
-          <hr class="w-full border-t-2 border-line-color border-dashed">
-        
-  
-        
-  
-      
-        
-  
-        
-  
-        
-  
-        
-  
-        
-          <!-- 链接部分 -->
-          <h3 class="text-hacker-color1 font-bold text-lg">Links</h3>
-          <div>
-            
-              <a href="mailto:2298013587@qq.com" target="_blank" class="text-hacker-color3 hover:text-white">
-                电子邮箱
-              </a>
-              <br />
-            
-          </div>
-          <hr class="w-full border-t-2 border-line-color border-dashed">
-        
-  
-      
     </div>
-  
-  
-  
-  
-  
 
 
-
-
-
-
+    <!-- 返回主页链接 -->
+    <div class="text-center my-8">
+        <a href="/" class="text-hacker-color1 underline hover:text-hacker-color2">← Back to Home</a>
     </div>
+
+      
+      <script src="/js/toc.js"></script>  <!-- 引入 TOC 逻辑 -->
+      
+      
+
     <footer class="bg-black text-gray-400 py-4">
  <div class="container mx-auto text-center">
   <p>© <span id="current-year"></span>  Lao Zhen 
@@ -314,6 +232,7 @@ svg: {
 };
 </script>
 <script src="js/tex-mml-chtml.js" async></script>
+
 
 
 </body>

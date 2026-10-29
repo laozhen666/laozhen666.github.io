@@ -10,45 +10,58 @@
   <rights>All rights reserved 2026, Lao Zhen</rights>
   <subtitle>Welcome to laozhen’s blog</subtitle>
   <title>blog</title>
-  <updated>2026-10-29T10:57:09.302Z</updated>
+  <updated>2026-10-29T11:58:05.636Z</updated>
   <entry>
     <author>
       <name>Lao Zhen</name>
     </author>
     <category term="工具分享" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/"/>
     <content>
-      <![CDATA[<p>进入首页随便点击一个视频</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/794a2db40ca34982b3bc8c318e824e4b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793875852&x-orig-sign=5NiV6rDMkNGE195wepxFXs1mAE0=" alt="f2b8652b1a76a59a608391e80a2a5a62.jpg"></p><p>点击右上角三角形，点击解析</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/801720ae99fc451e934b7279b37d9288~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793875852&x-orig-sign=4SPcKOF1mWebyepBI+fl2rs3Duo=" alt="96e67bd703b9016377f6c2acebdae6d4\_720.jpg"></p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/9f5e25fcd6ff42a5af042dbebe57096a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793875852&x-orig-sign=x3Z3aTcd4Icuekib5cxLVhxCgAw=" alt="2da4307905587577afa6d1185b813855\_720.jpg"><br>即可观看</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4a9a36bb0970470e979cbe7dc9ea0b18~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793875852&x-orig-sign=j4vS8BkgO8x1N8EE7sMvjqq0vbA=" alt="c50eddabee7d3d5fe6e493ccac07226d.jpg"></p><p>下载地址<br><a href="https://xiaowunetwork.lanzoum.com/ityLJ4bdwish">https://xiaowunetwork.lanzoum.com/ityLJ4bdwish</a></p>]]>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况<br><img src="/images/jietu/01.webp"><br>推荐一个强制截图的模块（需要 root）<br>第一步安装 lsposed，启用截图模块，shizuku<br>第二步在 root 软件中安装 lsposed<br>第三步在连接 shizuku，在 lsposed 上安装模块<br>第四步重启，在通知栏，看到 lsp 页面通知则为成功，然后就可以正常使用了<br><img src="/images/jietu/02.webp"><br><img src="/images/jietu/03.webp"><br>LSPosed官网：<a href="https://lsposed.cn/lsposed">LSPosed-LSPosed中文网</a><br>模块下载地址：<a href="https://github.com/LSPosed/LSPosed/releases">点击下载 LSPosed</a></p>]]>
     </content>
-    <id>http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/</id>
-    <link href="http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/"/>
-    <published>2026-10-29T10:51:35.377Z</published>
+    <id>http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/</id>
+    <link href="http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/"/>
+    <published>2026-10-29T11:30:00.000Z</published>
     <summary>
-      <![CDATA[<p>进入首页随便点击一个视频</p>
-<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/794a2db40ca34982b3bc8c318e824e4b~tplv-73owjymdk6-jj-m]]>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况<br><img src="/images/jietu/01.webp"><br>推荐一个强制截图的模块（需要 root）<br>第一步安装 lsposed，启用截图模块，shizuku<br>第二步在 root 软件中]]>
     </summary>
-    <title>vip视界</title>
-    <updated>2026-10-29T10:57:09.302Z</updated>
+    <title>安卓强制截屏</title>
+    <updated>2026-10-29T11:58:05.636Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <content>
+      <![CDATA[<hr><p>title: php代码执行<br>catagories</p><p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p><p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p><p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p><p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p><p>2.过滤特定字符<br>比如说他过滤了flag，我们可以使用通配符*或者？进行补齐，？只能补齐一个字符。在移动文件等场景也会使用通配符。<br>2.1还可以通过b64加密再解码输出的形式输出</p><p>3.无回显<br>输入指令无回显，使用＆＆或者｜｜进行一个短路处理，就是说把执行的命令放左边，将右边的命令进行一个短路，右边的命令无回显，左边正常运行</p><p>4.拼接过滤<br>其实也是2的一种，如果防御者把b64或者echo过滤了可以用这种<br>如a&#x3D;c;b&#x3D;at;c&#x3D;fla;d&#x3D;g.php;$a$b ${c}${d}<br>等效于cat flag.php</p><p>5.符号过滤<br>比如说把空格过滤<br>读文件时可以用&lt;&gt;<br>或者用＄{IFS}<br>或者用控制字符代替如%01，找不到控制字符时可以爆破试试<br>万不得已可以在源代码找到这个符号，然后根据源代码的位置将这个符号进行输出如<br>echo ${hajbsh:12:1}<br>输出hajb后十二个字符后第一个字符</p>]]>
+    </content>
+    <id>http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</id>
+    <link href="http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/"/>
+    <published>2026-10-29T10:59:51.128Z</published>
+    <summary>
+      <![CDATA[<hr>
+<p>title: php代码执行<br>catagories</p>
+<p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p>
+<p>]]>
+    </summary>
+    <updated>2026-10-29T11:55:28.304Z</updated>
   </entry>
   <entry>
     <author>
       <name>Lao Zhen</name>
     </author>
     <category term="工具分享" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/"/>
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    <category term="root" scheme="http://example.com/tags/root/"/>
-    <category term="截图" scheme="http://example.com/tags/%E6%88%AA%E5%9B%BE/"/>
     <content>
-      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4d62785375004217927839ff5681faf8~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=5zCfij1pfV2t8pU2mB2zkajU/i4=" alt="image.png"></p><p>推荐一个强制截图的模块（需要root）</p><p>第一步安装lsposed，启用截图模块，shizuku</p><p>第二步在root软件中安装lsposed</p><p>第三步在连接shizuku，在lsposed上安装模块</p><p>第四步重启，在通知栏，看到lsp页面通知则为成功，然后就可以正常使用了</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/9e403bb1fd3445b684b4b8d664d0620b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=cgBu5aXEQrbi5oZ0G5eNfPmYY6M=" alt="image.png"></p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/ffc7e5c7faf6410a9494c5da074264a7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=30ErTgIlEO/6nhW2HOvC+51jYEo=" alt="image.png"></p><p>lspoed官网<a href="https://lsposed.cn/lsposed">LSPosed-LSPosed中文网</a></p><p>模块下载地址<a href="https://release-assets.githubusercontent.com/github-production-release-asset/335557022/2619460c-8f41-4524-9de2-ecf17431a40e?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-30T09:15:34Z&rscd=attachment;+filename=app-release.apk&rsct=application/vnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-30T08:15:34Z&ske=2026-08-30T09:15:34Z&sks=b&skv=2018-11-09&sig=lxjlGLW3BTNzR1mXaJGwwLQefWoJQCv7LUVvyAq49Kk=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODA3ODAzNSwibmJmIjoxNzg4MDc3NzM1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.cLc7T_wG8FouHhC0QkdnAhYQaGk2wgkUybJr-X367_k&response-content-disposition=attachment;%20filename=app-release.apk&response-content-type=application/vnd.android.package-archive">https://release-assets.githubusercontent.com/github-production-release-asset/335557022/2619460c-8f41-4524-9de2-ecf17431a40e?sp=r&amp;sv=2018-11-09&amp;sr=b&amp;spr=https&amp;se=2026-08-30T09%3A15%3A34Z&amp;rscd=attachment%3B+filename%3Dapp-release.apk&amp;rsct=application%2Fvnd.android.package-archive&amp;skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&amp;sktid=398a6654-997b-47e9-b12b-9515b896b4de&amp;skt=2026-08-30T08%3A15%3A34Z&amp;ske=2026-08-30T09%3A15%3A34Z&amp;sks=b&amp;skv=2018-11-09&amp;sig=lxjlGLW3BTNzR1mXaJGwwLQefWoJQCv7LUVvyAq49Kk%3D&amp;jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODA3ODAzNSwibmJmIjoxNzg4MDc3NzM1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.cLc7T_wG8FouHhC0QkdnAhYQaGk2wgkUybJr-X367_k&amp;response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&amp;response-content-type=application%2Fvnd.android.package-archive</a></p>]]>
+      <![CDATA[<p>进入首页随便点击一个视频<br><img src="/images/vip/01.jpg"><br>点击右上角三角形，点击解析<br><img src="/images/vip/02.jpg"><br><img src="/images/vip/03.jpg"><br>即可观看<br><img src="/images/vip/04.jpg"><br>下载地址<br><a href="https://xiaowunetwork.lanzoum.com/ityLJ4bdwish">https://xiaowunetwork.lanzoum.com/ityLJ4bdwish</a></p>]]>
     </content>
-    <id>http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/</id>
-    <link href="http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/"/>
-    <published>2026-10-29T10:30:00.000Z</published>
+    <id>http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/</id>
+    <link href="http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/"/>
+    <published>2026-10-29T10:51:35.377Z</published>
     <summary>
-      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p>
-<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4d62785375004217927839ff5681faf8~tplv-]]>
+      <![CDATA[<p>进入首页随便点击一个视频<br><img src="/images/vip/01.jpg"><br>点击右上角三角形，点击解析<br><img src="/images/vip/02.jpg"><br><img src="/images/vip/03.jpg"><br>即可]]>
     </summary>
-    <title>安卓强制截屏</title>
-    <updated>2026-10-29T10:48:40.587Z</updated>
+    <title>vip视界</title>
+    <updated>2026-10-29T11:58:06.829Z</updated>
   </entry>
   <entry>
     <author>
