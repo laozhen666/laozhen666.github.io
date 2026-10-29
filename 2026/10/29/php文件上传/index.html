@@ -53,6 +53,12 @@
         <ul class="flex space-x-6">
           
             <li>
+              <a href="/notes" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Notes
+              </a>
+            </li>
+          
+            <li>
               <a href="/" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
                 Home
               </a>
@@ -102,6 +108,12 @@
     <!-- 折叠菜单 -->
     <nav id="mobile-menu" class="hidden bg-black">
       <ul class="space-y-2 py-4 px-6">
+        
+          <li>
+            <a href="/notes" class="block text-white hover:text-hacker-color1 transition-colors">
+              Notes
+            </a>
+          </li>
         
           <li>
             <a href="/" class="block text-white hover:text-hacker-color1 transition-colors">
@@ -183,8 +195,11 @@
 <p>这个是上传文件在linux下的临时目录</p>
 <h2 id="1-php的文件上传绕过-黑名单绕过"><a href="#1-php的文件上传绕过-黑名单绕过" class="headerlink" title="1 php的文件上传绕过 黑名单绕过"></a>1 php的文件上传绕过 黑名单绕过</h2><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/0f2979ad3ddb4661af0e75068d79b376~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793868131&x-orig-sign=IyNioYLWtZZS06DoKFmVy9/oBqA=" alt="253484d44db43756a2fe53f31275c281.png"></p>
 <p>后缀替换为空时，我们通过提交  1.pphphp 替换php为空后，得到1.php   成功写入木马</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">&lt;form action=&quot;index.php&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;<br>    &lt;input name=&quot;file&quot; type=&quot;file&quot; /&gt;<br>    &lt;input type=&quot;submit&quot; value=&quot;upload&quot; /&gt;<br>&lt;/form&gt;<br><br></code></pre></td></tr></table></figure>
-
+<pre><code>&lt;form action=&quot;index.php&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;
+    &lt;input name=&quot;file&quot; type=&quot;file&quot; /&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;upload&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
 <p>这个是文件上传的代码<br>比如说可以在index.php中写入一句话木马进行上传</p>
 <p>php3 php5 phps phtml</p>
 <p>php后缀替换为txt时，我们无法双写绕过，1.pphphp  1.ptxthp</p>
@@ -302,7 +317,7 @@ svg: {
 }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<script src="js/tex-mml-chtml.js" async></script>
 
 
 

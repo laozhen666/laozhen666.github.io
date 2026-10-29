@@ -27,6 +27,12 @@
         <ul class="flex space-x-6">
           
             <li>
+              <a href="/notes" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Notes
+              </a>
+            </li>
+          
+            <li>
               <a href="/" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
                 Home
               </a>
@@ -76,6 +82,12 @@
     <!-- 折叠菜单 -->
     <nav id="mobile-menu" class="hidden bg-black">
       <ul class="space-y-2 py-4 px-6">
+        
+          <li>
+            <a href="/notes" class="block text-white hover:text-hacker-color1 transition-colors">
+              Notes
+            </a>
+          </li>
         
           <li>
             <a href="/" class="block text-white hover:text-hacker-color1 transition-colors">
@@ -147,10 +159,10 @@
         <h1 class="
         text-hacker-color2 font-dos md:text-huge text-3xl text-wrap animate-bounce select-none bg-red-400 md:min-h-[5rem] md:leading-[5rem] 
         bg-gradient-to-r from-hacker-color1 to-hacker-color2 bg-clip-text text-transparent md:-mt-80 -mt-40
-        "></h1>
+        ">Welcome to laozhen’s blog</h1>
         <hr class="w-[85%] border-t-2 border-line-color border-dashed">
         
-        <p class="text-hacker-color2 md:mt-40 mt-20 md:text-2xl text-lg text-wrap font-dos w-[70%] select-none"></p>
+        <p class="text-hacker-color2 md:mt-40 mt-20 md:text-2xl text-lg text-wrap font-dos w-[70%] select-none">这是一个专注于网络安全的博客</p>
 
         <!-- 下拉按钮 -->
         <svg id="down-btn" class="icon w-16 h-16 absolute top-[75%] hover:-translate-y-1 transition-all cursor-pointer" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#bbbbbb">
@@ -162,6 +174,26 @@
     <div class="min-h-screen flex gap-8" id="scr-target">
       <!-- 文章部分 -->
       <div class="w-full">
+        
+          <div class="post-item group border-b border-b-hacker-color3 ">
+            <a href="/2026/10/29/git%E6%B3%84%E9%9C%B2%E5%92%8Croobots%E6%B3%84%E9%9C%B2/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
+              <h2 class="post-title text-hacker-color1 group-hover:text-white font-bold text-2xl">
+                git泄露和roobots泄露
+              </h2>
+              <p class="post-meta text-hacker-color3 text-sm group-hover:text-white">
+                2026-10-29
+              </p>
+              <p class="post-excerpt text-hacker-color3 group-hover:text-white">
+                1.git泄露
+git泄露就是服务器意外泄露了.git目录
+形式像这样……&amp;#x2F;baidu.com&amp;#x2F;.git&amp;#x2F;注意要有.和&amp;#x2F;
+如果显示403可用githack脚本将数据下载到本地https://github.com/lijiejie/GitHack
+2.robots泄露
+这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪
+User-agent: *Disallow: &amp;#x2F;admin&amp;#x2F;Disallow: &amp;#x2F;backup&amp;#x2F;Disallow: &amp;#x2F;db&amp;#x2F;Disallow: &amp;#x...
+              </p>
+            </a>
+          </div>
         
           <div class="post-item group border-b border-b-hacker-color3 ">
             <a href="/2026/10/29/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
@@ -177,7 +209,9 @@
 这个是上传文件在linux下的临时目录
 1 php的文件上传绕过 黑名单绕过
 后缀替换为空时，我们通过提交  1.pphphp 替换php为空后，得到1.php   成功写入木马
-&amp;lt;form action=&amp;quot;index.php&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;    &amp;lt;input name=&amp;quot;file&amp;quot; type=&amp;quot;file&amp;quot; /&amp;gt;    &amp;lt;...
+&amp;lt;form action=&amp;quot;index.php&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;
+    &amp;lt;input name=&amp;quot;file&amp;quot; type=&amp;quot;file&amp;quot; /&amp;gt;
+    &amp;l...
               </p>
             </a>
           </div>
@@ -336,7 +370,7 @@ svg: {
 }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<script src="js/tex-mml-chtml.js" async></script>
 
 
 </body>
