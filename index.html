@@ -164,6 +164,34 @@
       <div class="w-full">
         
           <div class="post-item group border-b border-b-hacker-color3 ">
+            <a href="/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C2/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
+              <h2 class="post-title text-hacker-color1 group-hover:text-white font-bold text-2xl">
+                php代码执行2
+              </h2>
+              <p class="post-meta text-hacker-color3 text-sm group-hover:text-white">
+                2026-10-29
+              </p>
+              <p class="post-excerpt text-hacker-color3 group-hover:text-white">
+                eval表示将字符串用php代码执行
+如
+`&amp;lt;?php
+$code = $_POST(&amp;#39;code&amp;#39;);
+eval=$code;
+
+?&amp;gt;`
+在一些场景中服务器发的是GET请求，但是你使用工具必须得换成POST请求，要进行一个转换
+
+比如说如图情况在后边加上？1&amp;#x3D;eval($_POST);
+就是把GET当作一个转接头，让GET请求执行POST命令
+回调函数 &amp;#x3D; 一个被当作参数传给别人的函数，由别人在合适的时机替你调用。这个有很多用法，遇到不会的去看php中文手册
+RCE
+Command指操作系统的命令
+systempassthruexecshell_...
+              </p>
+            </a>
+          </div>
+        
+          <div class="post-item group border-b border-b-hacker-color3 ">
             <a href="/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
               <h2 class="post-title text-hacker-color1 group-hover:text-white font-bold text-2xl">
                 安卓强制截屏
@@ -188,11 +216,10 @@
               </p>
               <p class="post-excerpt text-hacker-color3 group-hover:text-white">
                 
-title: php代码执行catagories
-在php中，有下面6种函数可以执行系统命令· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 
+title: php代码执行catagories: - ctf学习(暂时)在php中，有下面6种函数可以执行系统命令· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 
 在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等在linux&amp;#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等
 今天主要学习到几种php过滤方式以及应对策略，介绍一下
-1.替换过滤比如说把cat，替换成空格，我们就不能执行cat操作此时我们可以使用tac或者是双写cat像这样：...
+1.替换过滤比如说把cat，替换成空格，我们就不能执行cat操作此时我们可以使用tac...
               </p>
             </a>
           </div>
@@ -228,6 +255,32 @@ git泄露就是服务器意外泄露了.git目录
 2.robots泄露
 这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪
 User-agent: *Disallow: &amp;#x2F;admin&amp;#x2F;Disallow: &amp;#x2F;backup&amp;#x2F;Disallow: &amp;#x2F;db&amp;#x2F;Disallow: &amp;#x...
+              </p>
+            </a>
+          </div>
+        
+          <div class="post-item group border-b border-b-hacker-color3 ">
+            <a href="/2026/10/14/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C3-%E9%9A%BE/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
+              <h2 class="post-title text-hacker-color1 group-hover:text-white font-bold text-2xl">
+                php代码执行3(难)
+              </h2>
+              <p class="post-meta text-hacker-color3 text-sm group-hover:text-white">
+                2026-10-14
+              </p>
+              <p class="post-excerpt text-hacker-color3 group-hover:text-white">
+                md这个研究了两天时间真服了，有的东西都记混了，什么协议的，这篇可能说不太明白
+无回显状态下命令执行通道
+1.dns信道使用dnslog进行解析，解析后会将数据传回
+dnslog网站极其不稳定，不推荐
+2.http信道也不推荐进行使用
+3.写入文件，二次返回比如说讲咱们想要进行的命令操作写入txt，
+写入后再去访问txt
+4反弹shell信道4.1使用蚁剑进行拿取shell
+根据题目具体观察，看他禁用了什么，
+assert可以当做eval使用
+比如使用蚁剑插件如disable function再提权进行拿shell等
+各种插件都可以去试一下，使用完记得清除痕迹
+4.2.nc反弹，bash反弹，...
               </p>
             </a>
           </div>
@@ -281,7 +334,7 @@ User-agent: *Disallow: &amp;#x2F;admin&amp;#x2F;Disallow: &amp;#x2F;backup&amp;#
           <div>
             
               <a href="http://example.com/categories/ctf学习-暂时/" class="text-hacker-color3 hover:text-white">
-                ctf学习(暂时) (1)
+                ctf学习(暂时) (3)
               </a>
               <br />
             

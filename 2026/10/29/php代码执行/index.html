@@ -179,8 +179,7 @@
     <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
         <div id="middle-box">
             <hr>
-<p>title: php代码执行<br>catagories</p>
-<p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p>
+<h2 id="title-php代码执行catagories-ctf学习-暂时"><a href="#title-php代码执行catagories-ctf学习-暂时" class="headerlink" title="title: php代码执行catagories: - ctf学习(暂时)"></a>title: php代码执行<br>catagories:<br> - ctf学习(暂时)</h2><p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p>
 <p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p>
 <p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p>
 <p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p>
