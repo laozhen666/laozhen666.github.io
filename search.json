@@ -1,1 +1,1 @@
-[{"title":"git泄露和roobots泄露","url":"/2026/10/29/git泄露和roobots泄露/","content":"\n1.git泄露\n\ngit泄露就是服务器意外泄露了.git目录\n\n形式像这样……/baidu.com/.git/注意要有.和/\n\n如果显示403可用githack脚本将数据下载到本地https://github.com/lijiejie/GitHack\n\n2.robots泄露\n\n这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪\n\nUser-agent: *\nDisallow: /admin/\nDisallow: /backup/\nDisallow: /db/\nDisallow: /api/internal/\nDisallow: /config.php\n\n发现形式就是……/baidu.com/robots.txt直接进入即可"}]
+[]
