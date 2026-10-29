@@ -27,12 +27,6 @@
         <ul class="flex space-x-6">
           
             <li>
-              <a href="/notes" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
-                Notes
-              </a>
-            </li>
-          
-            <li>
               <a href="/" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
                 Home
               </a>
@@ -82,12 +76,6 @@
     <!-- 折叠菜单 -->
     <nav id="mobile-menu" class="hidden bg-black">
       <ul class="space-y-2 py-4 px-6">
-        
-          <li>
-            <a href="/notes" class="block text-white hover:text-hacker-color1 transition-colors">
-              Notes
-            </a>
-          </li>
         
           <li>
             <a href="/" class="block text-white hover:text-hacker-color1 transition-colors">
@@ -174,6 +162,25 @@
     <div class="min-h-screen flex gap-8" id="scr-target">
       <!-- 文章部分 -->
       <div class="w-full">
+        
+          <div class="post-item group border-b border-b-hacker-color3 ">
+            <a href="/2026/10/29/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
+              <h2 class="post-title text-hacker-color1 group-hover:text-white font-bold text-2xl">
+                
+              </h2>
+              <p class="post-meta text-hacker-color3 text-sm group-hover:text-white">
+                2026-10-29
+              </p>
+              <p class="post-excerpt text-hacker-color3 group-hover:text-white">
+                php的文件上传
+&amp;#x2F;tmp&amp;#x2F;php??????
+这个是上传文件在linux下的临时目录
+1 php的文件上传绕过 黑名单绕过
+后缀替换为空时，我们通过提交  1.pphphp 替换php为空后，得到1.php   成功写入木马
+&amp;lt;form action=&amp;quot;index.php&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;    &amp;lt;input name=&amp;quot;file&amp;quot; type=&amp;quot;file&amp;quot; /&amp;gt;    &amp;lt;...
+              </p>
+            </a>
+          </div>
         
           <div class="post-item group border-b border-b-hacker-color3 ">
             <a href="/2026/10/29/hello-world/" class="block py-2 px-8 group-hover:bg-hacker-hover-color space-y-4">
