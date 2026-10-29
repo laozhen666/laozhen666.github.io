@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>Lao Zhen</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <id>http://example.com/</id>
+  <link href="http://example.com/" rel="alternate"/>
+  <link href="http://example.com/rss.xml" rel="self"/>
+  <rights>All rights reserved 2026, Lao Zhen</rights>
+  <subtitle>Welcome to laozhen’s blog</subtitle>
+  <title>blog</title>
+  <updated>2026-10-29T10:48:40.587Z</updated>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="工具分享" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/"/>
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    <category term="root" scheme="http://example.com/tags/root/"/>
+    <category term="截图" scheme="http://example.com/tags/%E6%88%AA%E5%9B%BE/"/>
+    <content>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4d62785375004217927839ff5681faf8~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=5zCfij1pfV2t8pU2mB2zkajU/i4=" alt="image.png"></p><p>推荐一个强制截图的模块（需要root）</p><p>第一步安装lsposed，启用截图模块，shizuku</p><p>第二步在root软件中安装lsposed</p><p>第三步在连接shizuku，在lsposed上安装模块</p><p>第四步重启，在通知栏，看到lsp页面通知则为成功，然后就可以正常使用了</p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/9e403bb1fd3445b684b4b8d664d0620b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=cgBu5aXEQrbi5oZ0G5eNfPmYY6M=" alt="image.png"></p><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/ffc7e5c7faf6410a9494c5da074264a7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTFpfNjY2:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE3MjU1NzMwOTYwODc2NCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1793874805&x-orig-sign=30ErTgIlEO/6nhW2HOvC+51jYEo=" alt="image.png"></p><p>lspoed官网<a href="https://lsposed.cn/lsposed">LSPosed-LSPosed中文网</a></p><p>模块下载地址<a href="https://release-assets.githubusercontent.com/github-production-release-asset/335557022/2619460c-8f41-4524-9de2-ecf17431a40e?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-30T09:15:34Z&rscd=attachment;+filename=app-release.apk&rsct=application/vnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-30T08:15:34Z&ske=2026-08-30T09:15:34Z&sks=b&skv=2018-11-09&sig=lxjlGLW3BTNzR1mXaJGwwLQefWoJQCv7LUVvyAq49Kk=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODA3ODAzNSwibmJmIjoxNzg4MDc3NzM1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.cLc7T_wG8FouHhC0QkdnAhYQaGk2wgkUybJr-X367_k&response-content-disposition=attachment;%20filename=app-release.apk&response-content-type=application/vnd.android.package-archive">https://release-assets.githubusercontent.com/github-production-release-asset/335557022/2619460c-8f41-4524-9de2-ecf17431a40e?sp=r&amp;sv=2018-11-09&amp;sr=b&amp;spr=https&amp;se=2026-08-30T09%3A15%3A34Z&amp;rscd=attachment%3B+filename%3Dapp-release.apk&amp;rsct=application%2Fvnd.android.package-archive&amp;skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&amp;sktid=398a6654-997b-47e9-b12b-9515b896b4de&amp;skt=2026-08-30T08%3A15%3A34Z&amp;ske=2026-08-30T09%3A15%3A34Z&amp;sks=b&amp;skv=2018-11-09&amp;sig=lxjlGLW3BTNzR1mXaJGwwLQefWoJQCv7LUVvyAq49Kk%3D&amp;jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODA3ODAzNSwibmJmIjoxNzg4MDc3NzM1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.cLc7T_wG8FouHhC0QkdnAhYQaGk2wgkUybJr-X367_k&amp;response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&amp;response-content-type=application%2Fvnd.android.package-archive</a></p>]]>
+    </content>
+    <id>http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/</id>
+    <link href="http://example.com/2026/10/29/%E5%AE%89%E5%8D%93%E5%BC%BA%E5%88%B6%E6%88%AA%E5%B1%8F/"/>
+    <published>2026-10-29T10:30:00.000Z</published>
+    <summary>
+      <![CDATA[<p>很多人都会遇到这种想进行截图学习，但无法进行截图的情况</p>
+<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4d62785375004217927839ff5681faf8~tplv-]]>
+    </summary>
+    <title>安卓强制截屏</title>
+    <updated>2026-10-29T10:48:40.587Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Lao Zhen</name>
+    </author>
+    <category term="ctf学习(暂时)" scheme="http://example.com/categories/ctf%E5%AD%A6%E4%B9%A0-%E6%9A%82%E6%97%B6/"/>
+    <content>
+      <![CDATA[<p>1.git泄露</p><p>git泄露就是服务器意外泄露了.git目录</p><p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p><p>如果显示403可用githack脚本将数据下载到本地<a href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p><p>2.robots泄露</p><p>这个就是一个文本，告诉爬虫者哪些可以抓取哪些不能抓，也变相告诉渗透者重要信息在哪</p><p>User-agent: *<br>Disallow: &#x2F;admin&#x2F;<br>Disallow: &#x2F;backup&#x2F;<br>Disallow: &#x2F;db&#x2F;<br>Disallow: &#x2F;api&#x2F;internal&#x2F;<br>Disallow: &#x2F;config.php</p><p>发现形式就是……&#x2F;baidu.com&#x2F;robots.txt直接进入即可</p>]]>
+    </content>
+    <id>http://example.com/2026/10/29/git%E6%B3%84%E9%9C%B2%E5%92%8Croobots%E6%B3%84%E9%9C%B2/</id>
+    <link href="http://example.com/2026/10/29/git%E6%B3%84%E9%9C%B2%E5%92%8Croobots%E6%B3%84%E9%9C%B2/"/>
+    <published>2026-10-29T09:29:06.126Z</published>
+    <summary>
+      <![CDATA[<p>1.git泄露</p>
+<p>git泄露就是服务器意外泄露了.git目录</p>
+<p>形式像这样……&#x2F;baidu.com&#x2F;.git&#x2F;注意要有.和&#x2F;</p>
+<p>如果显示403可用githack脚本将数据下载到本地<a href="]]>
+    </summary>
+    <title>git泄露和roobots泄露</title>
+    <updated>2026-10-29T10:48:38.997Z</updated>
+  </entry>
+</feed>
